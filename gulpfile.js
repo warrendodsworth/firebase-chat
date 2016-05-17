@@ -15,9 +15,9 @@ var mainBowerFiles = require('main-bower-files');
 
 var paths = {
   css: ['./scss/**/*.scss', './css/**/*.css', '!./app/lib/**.*'],
-  js: ['./app/app.js', './app/**/*.js', '!./app/lib/**.*'],
-  font: './app/fonts/',
-  lib: './app/lib/'
+  js: ['./app.js', './**/*.js', '!./lib/*', '!./gulpfile.js', '!./node_modules', '!./bower_components'],
+  font: './fonts/',
+  lib: './lib/'
 };
 
 gulp.task('default', ['css', 'js', 'bower']);
