@@ -13,7 +13,8 @@
     vm.messages = $firebaseArray(msgsRef);
 
     vm.createMsg = function (model) {
-      vm.messages.$add({ name: model.name, text: model.text });
+      var timestamp = Math.floor(Date.now() / 1000);
+      vm.messages.$add({ name: model.name, text: model.text, timestamp: timestamp });
 
       vm.form.$setPristine();
       vm.model.text = null;
