@@ -15,7 +15,7 @@ var mainBowerFiles = require('main-bower-files');
 
 var paths = {
   css: ['./scss/**/*.scss', './css/**/*.css', '!./app/lib/**.*'],
-  js: ['./app.js', './**/*.js', '!./lib/*', '!./gulpfile.js', '!./node_modules', '!./bower_components'],
+  js: ['./app.js', './account/**/*.js', './home/**/*.js'],
   font: './fonts/',
   lib: './lib/'
 };
@@ -107,7 +107,7 @@ gulp.task('git-check', function (done) {
       '  ' + gutil.colors.red('Git is not installed.'),
       '\n  Download git here:', gutil.colors.cyan('http://git-scm.com/downloads') + '.',
       '\n  Once git is installed, run \'' + gutil.colors.cyan('gulp install') + '\' again.'
-      );
+    );
     process.exit(1);
   }
   done();

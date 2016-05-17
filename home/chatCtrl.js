@@ -1,9 +1,11 @@
 (function () {
   'use-strict';
 
-  angular.module('app').controller('ChatCtrl', ['$scope', '$firebaseArray', ChatCtrl]);
+  angular
+    .module('app')
+    .controller('chatCtrl', ['$scope', '$firebaseArray', chatCtrl]);
 
-  function ChatCtrl($scope, $firebaseArray) {
+  function chatCtrl($scope, $firebaseArray) {
     var vm = $scope;
 
     var ref = new Firebase('https://dazzling-fire-5094.firebaseio.com');
