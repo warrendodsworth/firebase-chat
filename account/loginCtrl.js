@@ -9,7 +9,8 @@
 
   function loginCtrl($scope, $firebaseAuth) {
     var vm = $scope;
-
+    var ref = new Firebase('https://dazzling-fire-5094.firebaseio.com');
+    
     // create an instance of the authentication service
     var auth = $firebaseAuth(ref);
 
@@ -22,4 +23,4 @@
       });
     };
   }
-})();
+})(); 
