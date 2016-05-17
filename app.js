@@ -1,33 +1,18 @@
 (function () {
   'use-strict';
 
-  var app = angular.module('app', ['firebase']);
+  angular.module('app', ['firebase']);
 
-  app.controller('HomeCtrl', ['$scope', '$firebaseArray', HomeCtrl]);
 
-  function HomeCtrl($scope, $firebaseArray) {
-    var vm = $scope;
+  angular.module('app')
+    .config(function ($routeProvider) {
+      $routeProvider
 
-    var ref = new Firebase('https://dazzling-fire-5094.firebaseio.com');
-    var msgsRef = ref.child('messages');
-    vm.messages = $firebaseArray(msgsRef);
+        .when('/', { templateUrl: 'home/home.html', controller: 'homeCtrl' })
+        .when('/chat/:id', { templateUrl: 'home/chat.html', controller: 'chatCtrl' })
 
-    vm.createMsg = function (model) {
-      vm.messages.$add({ name: model.name, text: model.text });
-
-      vm.form.$setPristine();
-      vm.model.text = null;
-    };
-
-    msgsRef.limitToLast(10).on('child_added', function (snapshot) {
-      var message = snapshot.val();
+        .when('/login', { templateUrl: 'account/login.html', controller: 'loginCtrl' })
+        .otherwise('/');
     });
-
-
-    //hide textbox
-    vm.setName = function (model) {
-      console.log('Blurred');
-      vm.nameSet = true;
-    };
-  }
+  
 })();

@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <p ng-repeat="msg in messages" ng-class="{'text-right': msg.name == model.name}">
+      <b ng-show="msg.name != model.name" class="font-sm">{{msg.name}}</b> {{msg.text}}
+    </p>
+
+    <p ng-show="nameSet" class="font-sm">{{model.name}}</p>
+    <form name="form" ng-submit="$event.keyCode == 13 && createMsg( model )" novalidate class="form-inline">
+      <div class="form-group" ng-blur="setName( model )" ng-hide="nameSet">
+        <input type='text' ng-model="model.name" placeholder='Name' class="form-control" />
+      </div>
+      <div class="form-group">
+        <input type='text' ng-model="model.text" placeholder='Chat here' class="form-control" />
+      </div>
+      <input type="submit" class="btn btn-primary" ng-click="createMsg( model )" value="Send" />
+    </form>
+
+  </div>
+</div>
