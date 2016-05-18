@@ -7,11 +7,12 @@
     }
   },
   "messages": {
-    "gen-id": {
-      "from-id": "",
-      "to-id": "",
+    "$uid1-$uid2": {
       "text": "",
       "timestamp": ""
     }
+  },
+  "typingIndicator":{
+    "$uid": false
   }
 }
