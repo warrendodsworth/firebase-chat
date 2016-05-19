@@ -15,7 +15,7 @@ var mainBowerFiles = require('main-bower-files');
 
 var paths = {
   css: ['./scss/**/*.scss', './css/**/*.css', '!./app/lib/**.*'],
-  js: ['./app.js', './account/**/*.js', './home/**/*.js'],
+  js: ['./app.js', './account/**/*.js', './home/**/*.js', './shared/**/*.js'],
   font: './fonts/',
   lib: './lib/'
 };

@@ -1,7 +1,7 @@
 (function () {
   'use-strict';
 
-  angular.module('app', ['ngRoute', 'firebase']);
+  angular.module('app', ['ngRoute', 'firebase', 'LocalStorageModule']);
 
 
   angular.module('app')
@@ -14,6 +14,10 @@
         .when('/login', { templateUrl: 'account/login.html', controller: 'loginCtrl' })
         .otherwise('/');
 
+    }])
+
+    .config(['$httpProvider', function ($httpProvider) {
+      $httpProvider.interceptors.push('HttpInterceptorService');
     }]);
 
 })(); 
