@@ -1,0 +1,49 @@
+{
+  "name": "bower",
+  "version": "1.0.0",
+  "authors": [
+    "warrendodsworth <warren.dodsworth@gmail.com>"
+  ],
+  "description": "Angular WebApi Starter template",
+  "main": "bower.json",
+  "keywords": [
+    "web"
+  ],
+  "license": "MIT",
+  "homepage": "index",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "1.5.5",
+    "angular-route": "1.5.5",
+    "angular-bootstrap": "~1.1.2",
+    "angular-local-storage": "~0.2.3",
+    "ng-facebook": "^0.1.6",
+    "jquery": "^2.2.0",
+    "bootstrap": "^3.3.6",
+    "font-awesome": "^4.5.0",
+    "chance": "^1.0.0"
+  },
+  "devDependencies": {
+    "angular-mocks": "^1.4.8"
+  },
+  "overrides": {
+    "bootstrap": {
+      "main": [
+        "dist/css/bootstrap.css",
+        "dist/fonts/*"
+      ]
+    },
+    "font-awesome": {
+      "main": [
+        "css/font-awesome.css",
+        "fonts/*"
+      ]
+    }
+  }
+}

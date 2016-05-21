@@ -1,0 +1,18 @@
+//Nosql db design structure
+{
+  "users": {
+    "user": {
+      "$uid": "1",
+      "friend_ids": []
+    }
+  },
+  "messages": {
+    "$uid1-$uid2": {
+      "text": "",
+      "timestamp": ""
+    }
+  },
+  "typingIndicator":{
+    "$uid": false
+  }
+}
