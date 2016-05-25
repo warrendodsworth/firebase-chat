@@ -13,11 +13,12 @@ var bower = require('bower');
 var livereload = require('livereload');
 var mainBowerFiles = require('main-bower-files');
 
+var root = './www/'
 var paths = {
-  css: ['./scss/**/*.scss', './css/**/*.css', '!./app/lib/**.*'],
-  js: ['./app.js', './account/**/*.js', './home/**/*.js', './shared/**/*.js'],
-  font: './fonts/',
-  lib: './lib/'
+  css: ['./scss/**/*.scss', './css/**/*.css', '!' + root + 'lib/**.*'],
+  js: [root + 'app.js', root + 'account/**/*.js', root + 'home/**/*.js', root + 'shared/**/*.js'],
+  font: root + 'fonts/',
+  lib: root + 'lib/'
 };
 
 gulp.task('default', ['css', 'js', 'bower']);
