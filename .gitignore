@@ -6,6 +6,7 @@
 *.user
 *.sln.docstates
 lib/
+Firebase/fonts/
 
 # Build results
 [Dd]ebug/
