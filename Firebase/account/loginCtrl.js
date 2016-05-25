@@ -16,12 +16,11 @@
     if (authData) {
       $location.path('/');
     }
-
+    
     // login with Facebook
     vm.facebookLogin = function () {
       auth.$authWithOAuthPopup("facebook")
-        .then(
-         function (authData) {
+        .then(function (authData) {
            ls.set('authData', authData);
            $location.path('/');
          })

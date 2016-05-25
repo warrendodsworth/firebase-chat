@@ -40,6 +40,7 @@ gulp.task('css', function (done) {
     .pipe(minifyCss({
       keepSpecialComments: 0
     }))
+     .on('error', handleError)
     .pipe(rename({ extname: '.min.css' }))
     .pipe(gulp.dest(paths.lib))
     .on('end', done);
@@ -51,6 +52,7 @@ gulp.task('js', function (done) {
     .pipe(concat('app.js'))
     .pipe(gulp.dest(paths.lib))
     .pipe(uglify())
+    .on('error', handleError)
     .pipe(rename({ suffix: '.min' }))
     .pipe(gulp.dest(paths.lib))
     .on('end', done);
@@ -113,4 +115,8 @@ gulp.task('git-check', function (done) {
   done();
 });
 
+function handleError(err) {
+  console.log(err.toString());
+  this.emit('end');
+}
 

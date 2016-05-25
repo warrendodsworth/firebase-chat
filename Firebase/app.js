@@ -20,4 +20,9 @@
       $httpProvider.interceptors.push('HttpInterceptorService');
     }]);
 
-})(); 
+  angular.module('app')
+  .constant('globals', {
+
+  });
+
+})();
