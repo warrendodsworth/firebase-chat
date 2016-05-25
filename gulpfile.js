@@ -7,7 +7,6 @@ var rename = require('gulp-rename');
 var filter = require('gulp-filter');
 var uglify = require('gulp-uglify');
 var less = require('gulp-less');
-var sass = require('gulp-sass');
 var sh = require('shelljs');
 var bower = require('bower');
 var livereload = require('livereload');
@@ -35,7 +34,7 @@ gulp.task('livereload', function () {
 
 gulp.task('css', function (done) {
   gulp.src(paths.css)
-    .pipe(sass())
+    .pipe(less())
     .pipe(concat('app.css'))
     .pipe(gulp.dest(paths.lib))
     .pipe(minifyCss({
