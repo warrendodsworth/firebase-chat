@@ -12,7 +12,7 @@
         .when('/chat/:id', { templateUrl: 'home/chat.html', controller: 'chatCtrl' })
 
         .when('/login', { templateUrl: 'account/login.html', controller: 'loginCtrl' })
-        .otherwise('/');
+        .otherwise('/login');
 
     }])
 
