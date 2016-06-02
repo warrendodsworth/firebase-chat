@@ -11,38 +11,29 @@
     var ref = new Firebase('https://dazzling-fire-5094.firebaseio.com');
     var vm = $scope;
     var isNewUser = true;
-    var auth = $firebaseAuth(ref);
 
-    var authData = ls.get('authData');
-    if (authData) {
-      $location.path('/');
-    }
-
-    // login with Facebook
     vm.facebookLogin = function () {
-      auth.$authWithOAuthPopup("facebook")
-        .then(function (authData) {
-          ls.set('authData', authData);
+      ref.authWithOAuthPopup('facebook', function (authData) {
+        if (authData) {
+          console.log("User " + authData.uid + " is logged in with " + authData.provider);
           $location.path('/');
-        })
-        .catch(function (error) {
-          console.log("Authentication failed:", error);
+        } else {
+          console.log("User is logged out");
+        }
+      });
+    };  
+    
+    ref.onAuth(function (authData) {
+      console.log(authData);
+      if (authData && isNewUser) {
+        // save the user's profile into the database so we can list users,
+        // use them in Security and Firebase Rules, and show profiles
+        ref.child("users").child(authData.uid).set({
+          provider: authData.provider,
+          name: getName(authData)
         });
-    };
-
-    // https://www.firebase.com/docs/web/libraries/angular/guide/intro-to-angularfire.html#section-angularfire-intro
-    //Non angular wireup    
-    // ref.onAuth(function (authData) {
-    //   if (authData && isNewUser) {
-    //     // save the user's profile into the database so we can list users,
-    //     // use them in Security and Firebase Rules, and show profiles
-    //     ref.child("users").child(authData.uid).set({
-    //       provider: authData.provider,
-    //       name: getName(authData)
-    //     });
-    //   }
-    // });
-
+      }
+    });
 
     //Helper
     function getName(authData) {
@@ -58,3 +49,21 @@
 
   }
 })();
+
+// https://www.firebase.com/docs/web/libraries/angular/guide/intro-to-angularfire.html#section-angularfire-intro
+// var auth = $firebaseAuth(ref);
+// var authData = ls.get('authData');
+// if (authData) {
+//   $location.path('/');
+// }
+// login with Facebook
+// vm.facebookLogin = function () {
+//   auth.$authWithOAuthPopup("facebook")
+//     .then(function (authData) {
+//       ls.set('authData', authData);
+//       $location.path('/');
+//     })
+//     .catch(function (error) {
+//       console.log("Authentication failed:", error);
+//     });
+// };
