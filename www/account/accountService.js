@@ -41,12 +41,13 @@
           name: getName(authData),
           provider: authData.provider
         };
-
-        $location.path('/');
-
+  
         console.log('svc: onauth fired');
         console.log(authData);
-      }  
+        
+      }  else{
+        console.log('svc: not logged in');
+      }
     });
 
     //Helper
