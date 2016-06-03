@@ -25,10 +25,31 @@
       </button>
         <a class="navbar-brand" href="#/">Chio</a>
       </div>
-      
-      <div class="navbar-collapse">
-        <ul class="nav navbar-nav navbar-right">
+
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li></li>
+        </ul>
+        <ul ng-hide="identity.auth" class="nav navbar-nav navbar-right">
           <li><a href="#/login">Login</a></li>
+        </ul>
+        <ul ng-show="identity.auth" class="nav navbar-nav navbar-right">
+          <li><a href="#/chat/1">Chat</a></li>
+          <li><a href="#/manage">{{identity.name}}</a></li>
+          <li class="dropdown" uib-dropdown>
+            <a uib-dropdown-toggle class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">
+              <span class="caret"></span>
+            </a>
+            <ul uib-dropdown-menu class="dropdown-menu">
+              <li>
+                <a href="#/manage" class="text-muted">
+                  {{identity.name}}
+                </a>
+              </li>
+              <li role="separator" class="divider"></li>
+              <li><a ng-click="logout( )">Logout</a></li>
+            </ul>
+          </li>
         </ul>
       </div>
     </div>

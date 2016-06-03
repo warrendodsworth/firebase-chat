@@ -1,6 +1,6 @@
 (function () {
   'use-strict';
-
+  //https://www.firebase.com/docs/web/libraries/angular/guide/intro-to-angularfire.html#section-angularfire-intro
   angular
     .module('app')
     .controller('chatCtrl', ['$scope', '$firebaseArray', chatCtrl]);

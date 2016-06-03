@@ -3,14 +3,15 @@
 
   angular
     .module('app')
-    .controller('NavbarController', ['$scope', '$firebaseAuth', NavbarController]);
+    .controller('NavbarController', ['$scope', '$location', 'accountService', NavbarController]);
 
-  function NavbarController($scope, $firebaseAuth) {
+  function NavbarController($scope, $location, accountService) {
     var vm = $scope;
 
-    var ref = new Firebase('https://dazzling-fire-5094.firebaseio.com');
-    var auth = $firebaseAuth(ref);
+    vm.logout = function () {
+      accountService.logout();
+      $location.path('/');
+    };
 
-    //Set navbar user account if logged in
   }
 })();

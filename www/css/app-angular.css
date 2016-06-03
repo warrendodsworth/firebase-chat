@@ -2,6 +2,10 @@
     display: none;
   }
   
+  [ng-click] {
+    cursor: pointer;
+  }
+  
   .font-sm {
     font-size: 70%;
   }
