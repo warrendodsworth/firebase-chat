@@ -3,11 +3,11 @@
 
   angular
     .module('app')
-    .factory('HttpInterceptorService', HttpInterceptorService);
+    .factory('httpInterceptorService', httpInterceptorService);
 
-  HttpInterceptorService.$inject = ['$q', '$location', '$rootScope', 'localStorageService'];
+  httpInterceptorService.$inject = ['$q', '$location', '$rootScope', 'localStorageService'];
 
-  function HttpInterceptorService($q, $location, $rootScope, localStorageService) {
+  function httpInterceptorService($q, $location, $rootScope, localStorageService) {
 
     var service = {};
 

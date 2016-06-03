@@ -23,7 +23,7 @@
   ]).config([
     '$httpProvider',
     function ($httpProvider) {
-      $httpProvider.interceptors.push('HttpInterceptorService');
+      $httpProvider.interceptors.push('httpInterceptorService');
     }
   ]);
   angular.module('app').constant('globals', {});
