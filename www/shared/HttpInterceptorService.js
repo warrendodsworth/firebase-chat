@@ -5,9 +5,9 @@
     .module('app')
     .factory('httpInterceptorService', httpInterceptorService);
 
-  httpInterceptorService.$inject = ['$q', '$location', '$rootScope', 'localStorageService'];
+  httpInterceptorService.$inject = ['$q', '$location', '$rootScope', 'accountService'];
 
-  function httpInterceptorService($q, $location, $rootScope, localStorageService) {
+  function httpInterceptorService($q, $location, $rootScope, accountService) {
 
     var service = {};
 
@@ -15,9 +15,9 @@
 
       config.headers = config.headers || {};
 
-      var authData = localStorageService.get('authorizationData');
-      if (authData) {
-        config.headers.Authorization = 'Bearer ' + authData.twitter.token;
+      var identity = accountService.identity;
+      if (identity) {
+        config.headers.Authorization = 'Bearer ' + identity.token;
       }
 
       return config;

@@ -3,8 +3,7 @@
   angular.module('app', [
     'ngRoute',
     'firebase',
-    'ui.bootstrap',
-    'LocalStorageModule'
+    'ui.bootstrap'
   ]);
   angular.module('app').config([
     '$routeProvider',

@@ -7,7 +7,7 @@
 
   manageController.$inject = ['$scope'];
   function manageController($scope) {
-    var vm = this;
+    var vm = $scope;
 
   }
 })();
