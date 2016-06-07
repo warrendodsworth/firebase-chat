@@ -15,6 +15,9 @@
       }).when('/chat/:id', {
         templateUrl: 'home/chat.html',
         controller: 'chatCtrl'
+      }).when('/manage', {
+        templateUrl: 'account/manage.html',
+        controller: 'manageCtrl'
       }).when('/login', {
         templateUrl: 'account/login.html',
         controller: 'loginCtrl'
@@ -23,8 +26,8 @@
   ]).config([
     '$httpProvider',
     function ($httpProvider) {
-      $httpProvider.interceptors.push('HttpInterceptorService');
+      $httpProvider.interceptors.push('httpInterceptorService');
     }
   ]);
-  angular.module('app').constant('globals', {});
+  // angular.module('app').constant('globals', {});
 } ());

@@ -14,7 +14,7 @@
 </head>
 
 <body>
-  <nav ng-controller="NavbarController" class="navbar navbar-default">
+  <nav ng-controller="navbarController" class="navbar navbar-default">
     <div class="container">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" aria-expanded="false">
@@ -38,7 +38,7 @@
           <li><a href="#/manage">{{identity.name}}</a></li>
           <li class="dropdown" uib-dropdown>
             <a uib-dropdown-toggle class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">
-              <span class="caret"></span>
+              <i class="fa fa-ellipsis-v"></i>
             </a>
             <ul uib-dropdown-menu class="dropdown-menu">
               <li>

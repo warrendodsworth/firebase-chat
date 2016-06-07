@@ -7,6 +7,7 @@
 
   function chatCtrl($scope, $firebaseArray) {
     var vm = $scope;
+    vm.model = {};
 
     var ref = new Firebase('https://dazzling-fire-5094.firebaseio.com');
     var msgsRef = ref.child('messages');

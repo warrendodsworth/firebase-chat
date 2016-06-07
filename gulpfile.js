@@ -39,9 +39,9 @@ gulp.task('js', function (done) {
   gulp.src(paths.js)
     .pipe(jshint())
     .pipe(jshint.reporter(stylish))
-    .pipe(fixmyjs({
-      //Jshint options      
-    }))
+    // .pipe(fixmyjs({
+    //   //Jshint options      
+    // }))
     .pipe(filter('**/*.js'))
     .pipe(concat('app.js'))
     .pipe(gulp.dest(paths.lib))

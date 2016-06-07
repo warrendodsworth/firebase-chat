@@ -24,13 +24,15 @@
     "angular-bootstrap": "~1.1.2",
     "angular-local-storage": "~0.2.3",
     "ng-facebook": "^0.1.6",
-    "jquery": "^2.2.0",
     "bootstrap": "^3.3.6",
     "font-awesome": "^4.5.0",
     "chance": "^1.0.0"
   },
   "devDependencies": {
     "angular-mocks": "^1.4.8"
+  },
+  "resolutions": {
+    "angular": ">=1.0.0 <2.0.0"
   },
   "overrides": {
     "bootstrap": {

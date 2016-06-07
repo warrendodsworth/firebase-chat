@@ -12,9 +12,8 @@
     var vm = $scope;
 
     vm.facebookLogin = function () {
-      ref.authWithOAuthPopup('facebook', function (error, authData) {
-        if (authData) {
-          console.log("User " + authData.uid + " is logged in with " + authData.provider);
+      ref.authWithOAuthRedirect('facebook', function (error) {
+        if (!error) {
           $scope.$apply(function () {
             $location.path('/');
           });  
@@ -32,7 +31,14 @@
 
 
 
-
+  // if (authData) {
+        //   console.log("User " + authData.uid + " is logged in with " + authData.provider);
+        //   $scope.$apply(function () {
+        //     $location.path('/');
+        //   });  
+        // } else {
+        //   console.log("User is logged out");
+        // }
 
 
 // https://www.firebase.com/docs/web/libraries/angular/guide/intro-to-angularfire.html#section-angularfire-intro
