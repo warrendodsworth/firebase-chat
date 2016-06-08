@@ -9,7 +9,7 @@
     var vm = $scope;
     vm.model = {};
 
-    var msgsRef = firebase.database().ref().child('messages');
+    var msgsRef = firebase.database().ref('messages/');
     vm.messages = $firebaseArray(msgsRef);
 
     vm.createMsg = function (model) {

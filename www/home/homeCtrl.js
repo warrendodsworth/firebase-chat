@@ -1,16 +1,28 @@
 (function () {
   'use-strict';
-  
-  angular.module('app')
-    .controller('homeCtrl', ['$scope', '$firebaseArray', homeCtrl]);
 
-  function homeCtrl($scope, $firebaseArray) {
+  angular.module('app')
+    .controller('homeCtrl', ['$scope', '$location', '$firebaseArray', homeCtrl]);
+
+  function homeCtrl($scope, $location, $firebaseArray) {
     var vm = $scope;
-    var ref = firebase.database();
-    
-    var chatsRef = ref('chats/');
+    var db = firebase.database();
+
+    //list users chats    
+    var chatsRef = db.ref('chats/');
     vm.chats = $firebaseArray(chatsRef);
-    
+
+    //List users
+    var usersRef = db.ref('users/');
+    vm.users = $firebaseArray(usersRef);
+
+    //create chat - add user to chat & chat to user 
+    vm.chatWith = function ($uid) {
+      var chatId = $uid + '-otherUid';
+      db.ref('users/' + $uid + '/chats/').push({ chatId: true });
+
+      $location.path('/chat/' + chatId);
+    };
   }
-  
+
 })(); 

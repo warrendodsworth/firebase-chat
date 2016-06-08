@@ -1,14 +1,24 @@
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
     <h2>Chats <i class="fa fa-comment-o"></i></h2>
-    
     <div class="media" ng-repeat="chat in chats">
       <div class="media-object"></div>
       <div class="media-content">
         <h3 class="media-heading">{{chat.name}}</h3>
-        
+
       </div>
     </div>
 
+
+    <p><b>Users</b></p>
+    <div class="media" ng-repeat="user in users">
+      <div class="media-object"></div>
+      <div class="media-content">
+        <p class="text-muted pull-right">
+          <a ng-click="chatWith(user.$id)"><i class="fa fa-comment-o fa-2x" style="color: #9ad1f3;"></i></a>
+        </p>
+        <h4 class="media-heading">{{user.name}}</h3>
+      </div>
+    </div>
   </div>
 </div>
