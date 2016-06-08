@@ -8,7 +8,8 @@
   Service.$inject = ['$location', '$rootScope'];
 
   function Service($location, $rootScope) {
-    var ref = new Firebase('https://dazzling-fire-5094.firebaseio.com');
+    var auth = firebase.auth();
+    var ref = firebase.database();
     var service = {};
 
     service.identity = $rootScope.identity = { auth: false };
@@ -19,12 +20,12 @@
       console.log('svc: logout fired');
     };
 
-    ref.onAuth(function (authData) {
+    auth.onAuthStateChanged(function (authData) {
 
       if (authData) {
         // save the user's profile into the database so we can list users,
         // use them in Security and Firebase Rules, and show profiles
-        var currentRef = ref.child('users').child(authData.uid);
+        var currentRef = ref('users/' + authData.uid);
         currentRef.once('value', function (snapshot) {
           var isNewUser = snapshot.exists();
           if (isNewUser) {

@@ -5,38 +5,37 @@
     .module('app')
     .controller('loginCtrl', loginCtrl);
 
-  loginCtrl.$inject = ['$scope', '$firebaseAuth', '$location', 'accountService'];
+  loginCtrl.$inject = ['$scope', '$location', 'accountService'];
 
-  function loginCtrl($scope, $firebaseAuth, $location, accountService) {
-    var ref = new Firebase('https://dazzling-fire-5094.firebaseio.com');
+  function loginCtrl($scope, $location, accountService) {
+    var provider = new firebase.auth.FacebookAuthProvider();
+    provider.addScope('email,user_likes');
     var vm = $scope;
 
     vm.facebookLogin = function () {
-      ref.authWithOAuthRedirect('facebook', function (error) {
-        if (!error) {
+      firebase.auth().signInWithRedirect(provider);
+
+      firebase.auth().getRedirectResult().then(function (result) {
+        if (result.credential) {
+          // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+          var token = result.credential.accessToken;
+          
           $scope.$apply(function () {
             $location.path('/');
-          });  
-        } else {
-          console.log("User is logged out");
+          });
         }
-      }, {
-          remember: "default", //sessionOnly
-          scope: "email,user_likes"
-        });
+        // The signed-in user info.
+        var user = result.user;
+      }).catch(function (error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // The email of the user's account used.
+        var email = error.email;
+        // The firebase.auth.AuthCredential type that was used.
+        var credential = error.credential;
+        // ...
+      });
     };
-  } 
+  }
 })();
-
-// https://www.firebase.com/docs/web/libraries/angular/guide/intro-to-angularfire.html#section-angularfire-intro
-// var auth = $firebaseAuth(ref);
-// vm.facebookLogin = function () {
-//   auth.$authWithOAuthPopup("facebook")
-//     .then(function (authData) {
-//       ls.set('authData', authData);
-//       $location.path('/');
-//     })
-//     .catch(function (error) {
-//       console.log("Authentication failed:", error);
-//     });
-// };

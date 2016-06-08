@@ -6,10 +6,10 @@
     .controller('navbarController', ['$scope', '$location', 'accountService', navbarController]);
 
   function navbarController($scope, $location, accountService) {
-    var ref = new Firebase('https://dazzling-fire-5094.firebaseio.com');
+    var ref = firebase.auth();
     var vm = $scope;
 
-    ref.onAuth(function (authData) {
+    ref.onAuthStateChanged(function (authData) {
       if (authData)
         $location.path('/');
       else

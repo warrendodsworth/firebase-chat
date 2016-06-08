@@ -6,11 +6,11 @@
 
   function homeCtrl($scope, $firebaseArray) {
     var vm = $scope;
-
-    var ref = new Firebase('https://dazzling-fire-5094.firebaseio.com');
-    var chatsRef = ref.child('chats');
+    var ref = firebase.database();
+    
+    var chatsRef = ref('chats/');
     vm.chats = $firebaseArray(chatsRef);
     
   }
   
-})();
+})(); 

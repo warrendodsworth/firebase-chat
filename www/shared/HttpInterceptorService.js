@@ -12,7 +12,6 @@
     var service = {};
 
     service.request = function (config) {
-
       config.headers = config.headers || {};
 
       var identity = accountService.identity;
