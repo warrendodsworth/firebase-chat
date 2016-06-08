@@ -29,9 +29,9 @@
         currentRef.once('value', function (snapshot) {
           var isNewUser = snapshot.exists();
           if (isNewUser) {
-            ref.child("users").child(authData.uid).set({
-              provider: authData.provider,
-              name: getName(authData)
+            ref('users/' + authData.uid).set({
+              name: getName(authData),
+              provider: authData.provider
             });
           }
         });
