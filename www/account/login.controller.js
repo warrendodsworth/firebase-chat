@@ -8,24 +8,27 @@
   LoginController.$inject = ['$scope', '$location', 'AccountService'];
 
   function LoginController($scope, $location, AccountService) {
+
     var provider = new firebase.auth.FacebookAuthProvider();
     provider.addScope('email,user_likes');
+    var auth = firebase.auth();
     var vm = $scope;
 
     vm.facebookLogin = function () {
-      firebase.auth().signInWithRedirect(provider);
+      auth.signInWithRedirect(provider);
 
-      firebase.auth().getRedirectResult().then(function (result) {
+      auth.getRedirectResult().then(function (result) {
         if (result.credential) {
           // This gives you a Facebook Access Token. You can use it to access the Facebook API.
           var token = result.credential.accessToken;
-          
-          $scope.$apply(function () {
-            $location.path('/');
-          });
         }
-        // The signed-in user info.
+       
         var user = result.user;
+        console.log(user);
+
+        $scope.$apply(function () {
+          $location.path('/');
+        });
       }).catch(function (error) {
         // Handle Errors here.
         var errorCode = error.code;
@@ -37,5 +40,6 @@
         // ...
       });
     };
+    
   }
 })();

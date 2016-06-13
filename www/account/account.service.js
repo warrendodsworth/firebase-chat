@@ -8,30 +8,25 @@
   AccountService.$inject = ['$location', '$rootScope'];
 
   function AccountService($location, $rootScope) {
+
     var auth = firebase.auth();
     var ref = firebase.database();
     var service = {};
 
     service.identity = $rootScope.identity = { auth: false };
 
-    service.logout = function () {
-      ref.unauth();
-      $rootScope.identity = { auth: false };
-      console.log('svc: logout fired');
-    };
-
-    auth.onAuthStateChanged(function (authData) {
-
-      if (authData) {
+    auth.onAuthStateChanged(function (user) {
+    
+      if (user) {
         // save the user's profile into the database so we can list users,
         // use them in Security and Firebase Rules, and show profiles
-        var currentRef = ref('users/' + authData.uid);
+        var currentRef = ref('users/' + user.uid);
         currentRef.once('value', function (snapshot) {
           var isNewUser = snapshot.exists();
           if (isNewUser) {
-            ref('users/' + authData.uid).set({
-              name: getName(authData),
-              provider: authData.provider
+            ref('users/' + user.uid).set({
+              name: getName(user),
+              provider: user.provider
             });
           }
         });
@@ -39,12 +34,12 @@
         //User authData to set identity
         $rootScope.identity = {
           auth: true,
-          name: getName(authData),
-          provider: authData.provider
+          name: getName(user),
+          provider: user.provider
         };
 
         console.log('svc: onauth fired');
-        console.log(authData);
+        console.log(user);
 
       } else {
         console.log('svc: not logged in');
@@ -63,8 +58,16 @@
       }
     }
 
+
+    service.logout = function () {
+      ref.unauth();
+      $rootScope.identity = { auth: false };
+      console.log('svc: logout fired');
+    };
+    
     return service;
   }
+
 })();
 
 //example res

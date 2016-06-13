@@ -8,6 +8,7 @@
   ManageController.$inject = ['$scope'];
   
   function ManageController($scope) {
+    
     var vm = $scope;
 
   }

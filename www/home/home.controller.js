@@ -15,7 +15,7 @@
     var chatsRef = db.ref('chats/');
     vm.chats = $firebaseArray(chatsRef);
 
-    //List users
+    //list users
     var usersRef = db.ref('users/');
     vm.users = $firebaseArray(usersRef);
 
@@ -24,6 +24,8 @@
       var chatId = $uid + '-otherUid';
       db.ref('users/' + $uid + '/chats/').push({ chatId: true });
 
+      //add user entry to chats/{chat-id}/users
+      
       $location.path('/chat/' + chatId);
     };
   }
