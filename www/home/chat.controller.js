@@ -3,9 +3,11 @@
   //https://www.firebase.com/docs/web/libraries/angular/guide/intro-to-angularfire.html#section-angularfire-intro
   angular
     .module('app')
-    .controller('chatCtrl', ['$scope', '$firebaseArray', chatCtrl]);
+    .controller('home.Chat', ChatController);
 
-  function chatCtrl($scope, $firebaseArray) {
+  ChatController.$inject = ['$scope', '$firebaseArray'];
+
+  function ChatController($scope, $firebaseArray) {
     var vm = $scope;
     vm.model = {};
 

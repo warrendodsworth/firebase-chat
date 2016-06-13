@@ -3,9 +3,11 @@
 
   angular
     .module('app')
-    .controller('navbarController', ['$scope', '$location', 'accountService', navbarController]);
+    .controller('shared.Navbar', NavbarController);
 
-  function navbarController($scope, $location, accountService) {
+  NavbarController.$inject = ['$scope', '$location', 'AccountService'];
+
+  function NavbarController($scope, $location, AccountService) {
     var ref = firebase.auth();
     var vm = $scope;
 
@@ -17,7 +19,7 @@
     });
 
     vm.logout = function () {
-      accountService.logout();
+      AccountService.logout();
       $location.path('/');
     };
 

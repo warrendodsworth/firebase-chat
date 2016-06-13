@@ -3,10 +3,11 @@
 
   angular
     .module('app')
-    .controller('manageController', manageController);
+    .controller('account.Manage', ManageController);
 
-  manageController.$inject = ['$scope'];
-  function manageController($scope) {
+  ManageController.$inject = ['$scope'];
+  
+  function ManageController($scope) {
     var vm = $scope;
 
   }

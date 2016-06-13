@@ -3,18 +3,18 @@
 
   angular
     .module('app')
-    .factory('httpInterceptorService', httpInterceptorService);
+    .factory('HttpInterceptorService', HttpInterceptorService);
 
-  httpInterceptorService.$inject = ['$q', '$location', '$rootScope', 'accountService'];
+  HttpInterceptorService.$inject = ['$q', '$location', '$rootScope', 'AccountService'];
 
-  function httpInterceptorService($q, $location, $rootScope, accountService) {
+  function HttpInterceptorService($q, $location, $rootScope, AccountService) {
 
     var service = {};
 
     service.request = function (config) {
       config.headers = config.headers || {};
 
-      var identity = accountService.identity;
+      var identity = AccountService.identity;
       if (identity) {
         config.headers.Authorization = 'Bearer ' + identity.token;
       }

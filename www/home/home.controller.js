@@ -1,10 +1,13 @@
 (function () {
   'use-strict';
 
-  angular.module('app')
-    .controller('homeCtrl', ['$scope', '$location', '$firebaseArray', homeCtrl]);
+  angular
+    .module('app')
+    .controller('home.Home', HomeController);
 
-  function homeCtrl($scope, $location, $firebaseArray) {
+  HomeController.$inject = ['$scope', '$location', '$firebaseArray'];
+
+  function HomeController($scope, $location, $firebaseArray) {
     var vm = $scope;
     var db = firebase.database();
 
@@ -24,5 +27,6 @@
       $location.path('/chat/' + chatId);
     };
   }
+
 
 })(); 
