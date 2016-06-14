@@ -10,14 +10,13 @@
   function NavbarController($scope, $location, AccountService) {
     var auth = firebase.auth();
     var vm = $scope;
-    
+   
     vm.identity = AccountService.identity;
 
     vm.logout = function () {
       vm.identity = AccountService.logout();
       $location.path('/');
     };
-
   }
 })();
 

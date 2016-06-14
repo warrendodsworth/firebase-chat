@@ -17,13 +17,9 @@
 
     auth.onAuthStateChanged(function (user) {
       if (user) {
-        service.identity.auth = true;
-       
-
-        console.log(user);
-
         user.providerData.forEach(function (profile) {
           if (profile.providerId == 'facebook.com') {
+            service.identity.auth = true;
             service.identity.name = profile.displayName;
             service.identity.email = profile.email;
             service.identity.photoURL = profile.photoURL;
@@ -43,6 +39,7 @@
         });
 
         console.log('svc: user logged in');
+        console.log(user);
         $rootScope.$apply(function () {
           $location.path('/');
         });

@@ -5,13 +5,15 @@
     .module('app')
     .controller('home.Chat', ChatController);
 
-  ChatController.$inject = ['$scope', '$firebaseArray'];
+  ChatController.$inject = ['$scope', '$firebaseArray', 'AccountService', 'currentAuth'];
 
-  function ChatController($scope, $firebaseArray) {
+  function ChatController($scope, $firebaseArray, AccountService, currentAuth) {
     var vm = $scope;
     vm.model = {};
+    vm.identity = AccountService.identity;
+    var db = firebase.database();
 
-    var msgsRef = firebase.database().ref('messages/');
+    var msgsRef = db.ref('messages/');
     vm.messages = $firebaseArray(msgsRef);
 
     vm.createMsg = function (model) {

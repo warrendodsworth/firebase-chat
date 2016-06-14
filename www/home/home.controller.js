@@ -5,9 +5,9 @@
     .module('app')
     .controller('home.Home', HomeController);
 
-  HomeController.$inject = ['$scope', '$location', '$firebaseArray'];
+  HomeController.$inject = ['$scope', '$location', '$firebaseArray', 'currentAuth'];
 
-  function HomeController($scope, $location, $firebaseArray) {
+  function HomeController($scope, $location, $firebaseArray, currentAuth) {
     var vm = $scope;
     var db = firebase.database();
 
