@@ -27,27 +27,7 @@
 
         // not working as expected        
         var user = result.user;
-
-        AccountService.identity = user;
-        AccountService.identity.auth = true;
-        console.log(user);
-
-        var currentRef = db.ref('users/' + user.uid);
-        currentRef.once('value', function (snapshot) {
-          console.log('Snapshot');
-          var isNewUser = !snapshot.exists();
-          if (isNewUser) {
-            db.ref('users/' + user.uid).set({
-              name: user.displayName,
-              email: user.email,
-              provider: user.provider
-            });
-          }
-        });
-
-        $scope.$apply(function () {
-          $location.path('/');
-        });
+       
       }).catch(function (error) {
         var errorCode = error.code;
         var errorMessage = error.message;

@@ -18,7 +18,29 @@
     auth.onAuthStateChanged(function (user) {
       if (user) {
         service.identity.auth = true;
-        service.identity.name = user.displayName;
+       
+
+        console.log(user);
+
+        user.providerData.forEach(function (profile) {
+          if (profile.providerId == 'facebook.com') {
+            service.identity.name = profile.displayName;
+            service.identity.email = profile.email;
+            service.identity.photoURL = profile.photoURL;
+          }
+          console.log("  Provider-specific UID: " + profile.uid);
+        });
+
+        var currentRef = db.ref('users/' + user.uid);
+        currentRef.once('value', function (snapshot) {
+          var isNewUser = !snapshot.exists();
+          if (isNewUser) {
+            db.ref('users/' + user.uid).set({
+              name: service.identity.name,
+              email: service.identity.email,
+            });
+          }
+        });
 
         console.log('svc: user logged in');
         $rootScope.$apply(function () {
