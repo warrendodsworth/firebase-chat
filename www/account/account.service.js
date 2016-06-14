@@ -16,10 +16,11 @@
     service.identity = $rootScope.identity = { auth: false };
 
     auth.onAuthStateChanged(function (user) {
-    
+
       if (user) {
-        // save the user's profile into the database so we can list users,
-        // use them in Security and Firebase Rules, and show profiles
+        console.log('svc: onauth fired');
+        console.log(user);
+
         var currentRef = ref('users/' + user.uid);
         currentRef.once('value', function (snapshot) {
           var isNewUser = snapshot.exists();
@@ -37,9 +38,6 @@
           name: getName(user),
           provider: user.provider
         };
-
-        console.log('svc: onauth fired');
-        console.log(user);
 
       } else {
         console.log('svc: not logged in');
@@ -64,12 +62,14 @@
       $rootScope.identity = { auth: false };
       console.log('svc: logout fired');
     };
-    
+
     return service;
   }
 
 })();
 
+// save the user's profile into the database so we can list users,
+// use them in Security and Firebase Rules, and show profiles
 //example res
 // var authData = {
 //   auth: {
