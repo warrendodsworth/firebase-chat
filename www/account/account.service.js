@@ -10,63 +10,52 @@
   function AccountService($location, $rootScope) {
 
     var auth = firebase.auth();
-    var ref = firebase.database();
+    var db = firebase.database();
     var service = {};
 
-    service.identity = $rootScope.identity = { auth: false };
+    service.identity = { auth: false };
 
     auth.onAuthStateChanged(function (user) {
-
       if (user) {
-        console.log('svc: onauth fired');
-        console.log(user);
+        service.identity.auth = true;
+        service.identity.name = user.displayName;
 
-        var currentRef = ref('users/' + user.uid);
-        currentRef.once('value', function (snapshot) {
-          var isNewUser = snapshot.exists();
-          if (isNewUser) {
-            ref('users/' + user.uid).set({
-              name: getName(user),
-              provider: user.provider
-            });
-          }
+        console.log('svc: user logged in');
+        $rootScope.$apply(function () {
+          $location.path('/');
         });
-
-        //User authData to set identity
-        $rootScope.identity = {
-          auth: true,
-          name: getName(user),
-          provider: user.provider
-        };
-
       } else {
         console.log('svc: not logged in');
+        $rootScope.$apply(function () {
+          $location.path('/login');
+        });
       }
     });
 
-    //Helper
-    function getName(authData) {
-      switch (authData.provider) {
-        case 'password':
-          return authData.password.email.replace(/@.*/, '');
-        case 'twitter':
-          return authData.twitter.displayName;
-        case 'facebook':
-          return authData.facebook.displayName;
-      }
-    }
-
-
     service.logout = function () {
-      ref.unauth();
-      $rootScope.identity = { auth: false };
-      console.log('svc: logout fired');
+      auth.signOut().then(function () {
+        console.log('svc: logout fired');
+      });
+      service.identity = { auth: false };
+      return service.identity;
     };
 
     return service;
   }
 
 })();
+
+
+
+
+
+
+
+
+
+
+
+
 
 // save the user's profile into the database so we can list users,
 // use them in Security and Firebase Rules, and show profiles
@@ -87,3 +76,35 @@
 //   provider: 'facebook', token:"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9",
 //   uid:"facebook:10154384221665145"
 // }
+
+
+// var currentRef = db.ref('users/' + user.uid);
+// currentRef.once('value', function (snapshot) {
+//   var isNewUser = snapshot.exists();
+//   if (isNewUser) {
+//     db.ref('users/' + user.uid).set({
+//       name: getName(user),
+//       provider: user.provider
+//     });
+//   }
+// });
+
+
+// function getName(user) {
+//   switch (user.provider) {
+//     case 'password':
+//       return user.password.email.replace(/@.*/, '');
+//     case 'twitter':
+//       return user.twitter.displayName;
+//     case 'facebook':
+//       return user.facebook.displayName;
+//   }
+// }
+
+
+// auth.onAuthStateChanged(function (user) {
+//   if (user)
+//     $location.path('/');
+//   else
+//     $location.path('/login');
+// });
