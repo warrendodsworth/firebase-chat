@@ -1,8 +1,8 @@
-body{
+body {
   color: #444;
 }
 
-h1, h2, h3, h4{
+h1, h2, h3, h4 {
   color: #444;
 }
 
@@ -20,3 +20,15 @@ h1, h2, h3, h4{
   padding: 20px;
   border-radius: 0 0 2px 2px;
 }
+
+.img-sm {
+  max-height: 30px;
+  max-width: 30px;
+}
+
+.navbar-photo {
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+  padding-right: 0 !important;
+}  
+  

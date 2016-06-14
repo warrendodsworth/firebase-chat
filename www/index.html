@@ -27,7 +27,11 @@
 
       <div class="navbar-collapse collapse">
         <ul ng-show="identity.auth" class="nav navbar-nav navbar-right">
-          <li><a href="#/chat/1">Chat</a></li>
+          <li>
+            <a href="#/manage" class="navbar-photo">
+              <img ng-src="{{identity.photoURL}}" class="img-circle img-sm" alt="Photo" />
+            </a>
+          </li>
           <li><a href="#/manage">{{identity.name}}</a></li>
           <li><a ng-click="logout( )">Logout</a></li>
         </ul>
