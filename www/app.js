@@ -55,7 +55,7 @@
         }
       });
     }])
-    .config(['$httpProvider', function (httpProvider) {
+    .config(['$httpProvider', function ($httpProvider) {
       var config = {
         apiKey: 'AIzaSyC9xO8omc7TxZZ0n4SOQW3bpE-uRryaVD4',
         authDomain: 'dazzling-fire-5094.firebaseapp.com',
