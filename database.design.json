@@ -3,10 +3,7 @@
   "users": {
     "$uid": {
       "name": "Owen",
-      "email": "owen@gmail.com",
-      "chats": {
-        "one": true
-      }
+      "email": "owen@gmail.com"
     }
   },
   // stored under the chats's unique ID

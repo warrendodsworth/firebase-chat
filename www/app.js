@@ -14,7 +14,7 @@
         return $firebaseAuth();
       }
     ])
-    
+
     .run(["$rootScope", "$location", function ($rootScope, $location) {
       $rootScope.$on("$routeChangeError", function (event, next, previous, error) {
         // We can catch the error thrown when the $requireSignIn promise is rejected
@@ -24,6 +24,14 @@
         }
       });
     }])
+    
+    .run(['$rootScope', 'Auth', function ($rootScope, Auth) {
+      // track status of authentication
+      // Auth.$onAuth(function (user) {
+      //   $rootScope.identity.auth = !!user;
+      // });
+    }])
+
     .config(['$httpProvider', function ($httpProvider) {
       var config = {
         apiKey: 'AIzaSyC9xO8omc7TxZZ0n4SOQW3bpE-uRryaVD4',

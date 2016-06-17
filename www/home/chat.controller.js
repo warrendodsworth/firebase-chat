@@ -9,10 +9,10 @@
 
   function ChatController($scope, $firebaseArray, AccountService, currentAuth) {
     var vm = $scope;
+    var db = firebase.database();
     vm.model = {};
     vm.identity = AccountService.identity;
-    var db = firebase.database();
-
+    console.log(currentAuth);
     var msgsRef = db.ref('messages/');
     vm.messages = $firebaseArray(msgsRef);
 
