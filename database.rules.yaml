@@ -1,5 +1,5 @@
 #https://github.com/firebase/blaze_compiler
-#blaze rules.yaml - to compile to firebase db rules definition 
+#blaze database.rules.yaml - to compile to firebase db rules definition 
 functions:            #reusable boolean functions
   - isLoggedIn():      auth.username !== null
   - createOnly():      next.exists() && !prev.exists()

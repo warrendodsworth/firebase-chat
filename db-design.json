@@ -46,9 +46,5 @@
     },
     "two": {},
     "three": {}
-  },
-  "typingIndicator": {
-    "$uid1": true,
-    "$uid2": true
   }
 }
