@@ -26,10 +26,7 @@
       db.ref('users/' + $uid + '/chats/').push({ chatId: true });
 
       //add user entry to chats/{chat-id}/users
-      
       $location.path('/chat/' + chatId);
     };
   }
-
-
 })(); 

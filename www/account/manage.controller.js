@@ -2,12 +2,14 @@ angular.module('app')
 
   // a factory to create a re-usable Profile object
   // we pass in a username and get back their synchronized data as an object
-  .factory('Profile', ['$firebaseObject', 
-    function ($firebaseObject) {
+  .factory('Profile', ['$firebaseObject', '$firebaseAuth',
+    function ($firebaseObject, $firebaseAuth) {
       return function (username) {
+        var user = $firebaseAuth().$getAuth();
+
         // create a reference to the database where we will store our data
         var randomRoomId = Math.round(Math.random() * 100000000);
-        var profileRef = firebase.database().ref('users/' + currentAuth.uid);
+        var profileRef = firebase.database().ref('users/' + user.uid);
 
         // return it as a synchronized object
         return $firebaseObject(profileRef);

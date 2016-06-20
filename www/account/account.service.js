@@ -5,58 +5,48 @@
     .module('app')
     .factory('AccountService', AccountService);
 
-  AccountService.$inject = ['$location', '$rootScope'];
+  AccountService.$inject = ['$location', '$rootScope', '$firebaseAuth'];
 
-  function AccountService($location, $rootScope) {
-
-    var auth = firebase.auth();
-    var db = firebase.database();
+  function AccountService($location, $rootScope, $firebaseAuth) {
     var service = {};
+    var db = firebase.database();
 
-    service.identity = { auth: false };
+    service.auth = {};
 
-    auth.onAuthStateChanged(function (user) {
+    $firebaseAuth().$onAuthStateChanged(function (user) {
       if (user) {
         user.providerData.forEach(function (profile) {
           if (profile.providerId == 'facebook.com') {
-            service.identity.auth = true;
-            service.identity.name = profile.displayName;
-            service.identity.email = profile.email;
-            service.identity.photoURL = profile.photoURL;
+            service.auth.name = profile.displayName;
+            service.auth.email = profile.email;
+            service.auth.photoURL = profile.photoURL;
           }
-          console.log("  Provider-specific UID: " + profile.uid);
         });
 
         var currentRef = db.ref('users/' + user.uid);
         currentRef.once('value', function (snapshot) {
           var isNewUser = !snapshot.exists();
           if (isNewUser) {
-            db.ref('users/' + user.uid).set({
-              name: service.identity.name,
-              email: service.identity.email,
+            currentRef.set({
+              name: service.auth.name,
+              email: service.auth.email,
             });
           }
         });
 
         console.log('svc: user logged in');
         console.log(user);
-        $rootScope.$apply(function () {
-          $location.path('/');
-        });
+        $location.path('/');
       } else {
         console.log('svc: not logged in');
-        $rootScope.$apply(function () {
-          $location.path('/login');
-        });
+        $location.path('/login');
       }
     });
 
     service.logout = function () {
-      auth.signOut().then(function () {
-        console.log('svc: logout fired');
-      });
-      service.identity = { auth: false };
-      return service.identity;
+      $firebaseAuth().$signOut()
+      service.auth = {};
+      return service.auth;
     };
 
     return service;
@@ -74,6 +64,19 @@
 
 
 
+
+
+
+// auth.getRedirectResult().then(function (result) {
+//   if (result.credential) {
+//     var token = result.credential.accessToken; //Facebook Access token
+//   }
+// }).catch(function (error) {
+//   var errorCode = error.code;
+//   var errorMessage = error.message;
+//   var email = error.email;
+//   var credential = error.credential;    // The firebase.auth.AuthCredential type that was used.
+// });
 
 
 // save the user's profile into the database so we can list users,
