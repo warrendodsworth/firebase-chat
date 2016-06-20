@@ -44,7 +44,7 @@
 
     //Logout    
     service.logout = function () {
-      $firebaseAuth().$signOut()
+      $firebaseAuth().$signOut();
       service.auth = {};
       return service.auth;
     };

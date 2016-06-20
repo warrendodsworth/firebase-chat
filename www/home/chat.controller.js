@@ -14,7 +14,7 @@
     
     vm.auth = AccountService.auth;
     vm.model = {};
-    vm.model.name = vm.auth.name;
+    vm.model.from = vm.auth.name;
 
     console.log('Current Auth');
     console.log(currentAuth);
@@ -29,7 +29,7 @@
     vm.sendMessage = function (model) {
       var timestamp = new Date().getTime();
 
-      vm.messages.$add({ name: model.name, text: model.text, timestamp: timestamp });
+      vm.messages.$add({ from: model.from, text: model.text, timestamp: timestamp });
 
       chatRef.set({ title: '', lastMessage: model.text, timestamp: timestamp });
 
@@ -39,6 +39,17 @@
 
     msgsRef.limitToLast(10).on('child_added', function (snapshot) {
       var message = snapshot.val();
+    });
+
+     // if the messages are empty, add something for fun!
+    vm.messages.$loaded(function() {
+      if (vm.messages.length === 0) {
+        vm.messages.$add({
+          from: "Firebase", 
+          text: "Hey there, start anytime you like!", 
+          timestamp: new Date().getTime()
+        });
+      }
     });
 
   }
