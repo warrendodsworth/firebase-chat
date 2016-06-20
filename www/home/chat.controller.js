@@ -1,27 +1,37 @@
 (function () {
   'use-strict';
-  //https://www.firebase.com/docs/web/libraries/angular/guide/intro-to-angularfire.html#section-angularfire-intro
+
   angular
     .module('app')
     .controller('home.Chat', ChatController);
 
-  ChatController.$inject = ['$scope', '$firebaseArray', 'AccountService', 'currentAuth'];
+  ChatController.$inject = ['$scope', '$firebaseArray', '$routeParams', 'AccountService', 'currentAuth'];
 
-  function ChatController($scope, $firebaseArray, AccountService, currentAuth) {
+  function ChatController($scope, $firebaseArray, $routeParams, AccountService, currentAuth) {
     var vm = $scope;
     var db = firebase.database();
+    var chatId = $routeParams.id;
+    
     vm.auth = AccountService.auth;
     vm.model = {};
     vm.model.name = vm.auth.name;
-    
+
+    console.log('Current Auth');
     console.log(currentAuth);
 
-    var msgsRef = db.ref('messages/');
+
+    var chatRef = db.ref('chats/' + chatId);
+    //vm.chat = $firebaseObject(chatRef);
+
+    var msgsRef = db.ref('messages/' + chatId);
     vm.messages = $firebaseArray(msgsRef);
 
-    vm.createMsg = function (model) {
-      var timestamp = Math.floor(Date.now() / 1000);
+    vm.sendMessage = function (model) {
+      var timestamp = new Date().getTime();
+
       vm.messages.$add({ name: model.name, text: model.text, timestamp: timestamp });
+
+      chatRef.set({ title: '', lastMessage: model.text, timestamp: timestamp });
 
       vm.form.$setPristine();
       vm.model.text = null;
@@ -33,3 +43,6 @@
 
   }
 })();
+
+
+//https://www.firebase.com/docs/web/libraries/angular/guide/intro-to-angularfire.html#section-angularfire-intro

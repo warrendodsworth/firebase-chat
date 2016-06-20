@@ -23,12 +23,13 @@
     //create chat
     vm.chatWith = function ($uid, name) {
       //add to chats, members
-
-      var chatId = $uid + '-' + firebase.auth().currentUser.uid;
+      var myUid = firebase.auth().currentUser.uid;
+      var chatId = $uid + '-' + myUid;
 
       db.ref('chats/' + chatId).push({ title: name, lastMessage: '', timestamp: new Date().getTime() });
 
       db.ref('members/' + chatId + '/' + $uid).set(true);
+      db.ref('members/' + chatId + '/' + myUid).set(true);
 
       $location.path('/chat/' + chatId);
     };

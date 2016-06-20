@@ -9,8 +9,6 @@
 
   function AccountService($location, $rootScope, $firebaseAuth) {
     var service = {};
-    var db = firebase.database();
-
     service.auth = {};
 
     //Init auth watcher    
@@ -24,7 +22,7 @@
           }
         });
 
-        var currentRef = db.ref('users/' + user.uid);
+        var currentRef = firebase.database().ref('users/' + user.uid);
         currentRef.once('value', function (snapshot) {
           var isNewUser = !snapshot.exists();
           if (isNewUser) {

@@ -6,7 +6,7 @@
       </p>
     </div>
 
-    <form name="form" ng-submit="$event.keyCode == 13 && createMsg( model )" novalidate
+    <form name="form" ng-submit="$event.keyCode == 13 && sendMessage( model )" novalidate
       class="form-inline">
 
       <div class="form-group" ng-hide="model.name">
@@ -16,7 +16,7 @@
       <div class="form-group">
         <input type='text' ng-model="model.text" placeholder='Chat here' class="form-control" />
       </div>
-      <input type="submit" class="btn btn-primary" ng-click="createMsg( model )" value="Send" />
+      <input type="submit" class="btn btn-primary" ng-click="sendMessage( model )" value="Send" />
 
     </form>
 

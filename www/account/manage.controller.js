@@ -1,13 +1,12 @@
-angular.module('app')
+angular
+  .module('app')
 
-  // a factory to create a re-usable Profile object
+
   .factory('Profile', ['$firebaseObject', '$firebaseAuth',
     function ($firebaseObject, $firebaseAuth) {
+      // a factory to create a re-usable Profile object
       return function (uid) {
-
-        var randomRoomId = Math.round(Math.random() * 100000000);
         var profileRef = firebase.database().ref('users/' + uid);
-
         return $firebaseObject(profileRef);
       };
     }
@@ -19,4 +18,7 @@ angular.module('app')
       // create a three-way binding to our Profile as $scope.profile
       Profile(user.uid).$bindTo($scope, 'profile');
     }
-  ]);  
+  ]);
+
+
+// var randomRoomId = Math.round(Math.random() * 100000000);
