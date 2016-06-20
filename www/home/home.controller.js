@@ -10,8 +10,9 @@
   function HomeController($scope, $location, $firebaseArray, currentAuth) {
     var vm = $scope;
     var db = firebase.database();
+    var auth = firebase.auth();
 
-    //list users chats    
+    //list users chats - may need tabs
     var chatsRef = db.ref('chats/');
     vm.chats = $firebaseArray(chatsRef);
 
@@ -19,13 +20,16 @@
     var usersRef = db.ref('users/');
     vm.users = $firebaseArray(usersRef);
 
-    //create chat - add user to chat & chat to user 
-    vm.chatWith = function ($uid) {
-      var chatId = $uid + '-otherUid';
-      
-      db.ref('users/' + $uid + '/chats/').push({ chatId: true });
+    //create chat
+    vm.chatWith = function ($uid, name) {
+      //add to chats, members
 
-      //add user entry to chats/{chat-id}/users
+      var chatId = $uid + '-' + firebase.auth().currentUser.uid;
+
+      db.ref('chats/' + chatId).push({ title: name, lastMessage: '', timestamp: new Date().getTime() });
+
+      db.ref('members/' + chatId + '/' + $uid).set(true);
+
       $location.path('/chat/' + chatId);
     };
   }

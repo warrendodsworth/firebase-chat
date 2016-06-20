@@ -12,7 +12,7 @@
     var db = firebase.database();
     vm.auth = AccountService.auth;
     vm.model = {};
-    model.name = auth.name;
+    vm.model.name = vm.auth.name;
     
     console.log(currentAuth);
 

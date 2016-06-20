@@ -13,6 +13,7 @@
 
     service.auth = {};
 
+    //Init auth watcher    
     $firebaseAuth().$onAuthStateChanged(function (user) {
       if (user) {
         user.providerData.forEach(function (profile) {
@@ -43,6 +44,7 @@
       }
     });
 
+    //Logout    
     service.logout = function () {
       $firebaseAuth().$signOut()
       service.auth = {};

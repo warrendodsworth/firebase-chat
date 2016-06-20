@@ -1,16 +1,17 @@
-
-<h3>Edit</h3>
+<h3>Manage</h3>
 
 <form novalidate>
   <label>Name</label>
-  <!-- this input field synchronizes directly to the name attribute in our Firebase database! -->
   <input type="text" ng-model="profile.name" class="form-control">
 
   <label>Email</label>
-  <!-- and this input field synchronizes directly to the email attribute in our Firebase database! -->
   <input type="text" ng-model="profile.email" class="form-control">
+
+  <!--Settings-->
 </form>
 
+
+<!-- this input field synchronizes directly to the name attribute in our Firebase database! -->
 <!-- $id is a special meta variable containing the object's key in our Firebase database.
   In this case, it would be "physicsmarie" -->
 <!-- {{ profile.$id }}-->
