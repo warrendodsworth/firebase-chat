@@ -19,9 +19,8 @@
       templateUrl: 'home/home.html', controller: 'home.Home',
       resolve: {
         // controller will not be loaded until $waitForSignIn resolves
-        // Auth refers to our $firebaseAuth wrapper in the example above
+        // $waitForSignIn returns a promise so the resolve waits for it to complete
         "currentAuth": ["Auth", function (Auth) {
-          // $waitForSignIn returns a promise so the resolve waits for it to complete
           return Auth.$requireSignIn();
         }]
       }
@@ -29,11 +28,10 @@
       .when('/chat/:id', {
         templateUrl: 'home/chat.html', controller: 'home.Chat',
         resolve: {
-          // controller will not be loaded until $requireSignIn resolves
           // Auth refers to our $firebaseAuth wrapper in the example above
+          // $requireSignIn returns a promise so the resolve waits for it to complete
+          // If the promise is rejected, it will throw a $stateChangeError (see above)
           "currentAuth": ["Auth", function (Auth) {
-            // $requireSignIn returns a promise so the resolve waits for it to complete
-            // If the promise is rejected, it will throw a $stateChangeError (see above)
             return Auth.$requireSignIn();
           }]
         }
@@ -46,9 +44,16 @@
           }]
         }
       })
-      .when('/login', { templateUrl: 'account/login.html', controller: 'account.Login' })
+      .when('/login', {
+        templateUrl: 'account/login.html', controller: 'account.Login'
+      })
 
       .otherwise('/login');
   }
 
 })();
+
+
+// , "currentAuth": ["Auth", function (Auth) {
+//           return Auth.$waitForSignIn();
+//         }]
