@@ -26,7 +26,7 @@
       var myUid = firebase.auth().currentUser.uid;
       var chatId = $uid + '-' + myUid;
 
-      db.ref('chats/' + chatId).set({ title: name, lastMessage: '', timestamp: new Date().getTime() });
+      db.ref('chats/' + chatId).set({ title: name, lastMessage: '', timestamp: firebase.database.ServerValue.TIMESTAMP });
 
       db.ref('members/' + chatId + '/' + $uid).set(true);
       db.ref('members/' + chatId + '/' + myUid).set(true);

@@ -11,11 +11,13 @@
     var vm = $scope;
     vm.navCollapse = true;
     vm.auth = AccountService.auth;
-    
+
     vm.logout = function () {
-      vm.auth = AccountService.logout(); 
+      vm.auth = AccountService.logout();
       $location.path('/');
     };
+
+    
   }
 })();
 

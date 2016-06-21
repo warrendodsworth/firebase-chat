@@ -11,6 +11,17 @@
     var service = {};
     service.auth = {};
 
+    //Presence    
+    var db = firebase.database.ref();
+    var amOnline = db('.info/connected');
+    var userRef = db('presence/' + userid);
+    amOnline.on('value', function (snapshot) {
+      if (snapshot.val()) {
+        userRef.onDisconnect().set(firebase.database.ServerValue.TIMESTAMP);
+        userRef.set(true);
+      }
+    });
+
     //Init auth watcher    
     $firebaseAuth().$onAuthStateChanged(function (user) {
       if (user) {

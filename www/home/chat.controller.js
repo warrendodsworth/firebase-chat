@@ -27,11 +27,10 @@
     vm.messages = $firebaseArray(msgsRef);
 
     vm.sendMessage = function (model) {
-      var timestamp = new Date().getTime();
 
-      vm.messages.$add({ from: model.from, text: model.text, timestamp: timestamp });
+      vm.messages.$add({ from: model.from, text: model.text, timestamp: firebase.database.ServerValue.TIMESTAMP });
 
-      chatRef.set({ title: '', lastMessage: model.text, timestamp: timestamp });
+      chatRef.set({ title: '', lastMessage: model.text, timestamp: firebase.database.ServerValue.TIMESTAMP });
 
       vm.form.$setPristine();
       vm.model.text = null;
@@ -47,7 +46,7 @@
         vm.messages.$add({
           from: "Firebase", 
           text: "Hey there, start anytime you like!", 
-          timestamp: new Date().getTime()
+          timestamp: firebase.database.ServerValue.TIMESTAMP
         });
       }
     });
