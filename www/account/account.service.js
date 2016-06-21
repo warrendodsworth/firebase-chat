@@ -44,8 +44,7 @@
         console.log(user);
 
         
-        var userRef = db.ref('presence/' + auth.currentUser.uid);
-
+        var userRef = db.ref('presence/' + user.uid);
         amOnline.on('value', function (snapshot) {
           if (snapshot.val()) {
             userRef.onDisconnect().set(firebase.database.ServerValue.TIMESTAMP);
