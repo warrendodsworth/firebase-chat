@@ -1,22 +1,33 @@
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <h2>Chats</h2>
-    <div class="media" ng-repeat="chat in chats">
-      <div class="media-object"></div>
-      <div class="media-content">
-        <h3 class="media-heading">{{chat.name}}</h3>
 
-      </div>
-    </div>
+    <uib-tabset type="pills">
+      
+      <uib-tab heading="Users">
+        <br/>
+        <div class="media" ng-repeat="user in users">
+          <div class="media-object"></div>
+          <div class="media-content">
+            <p class="text-muted pull-right">
+              <a ng-click="chatWith(user.$id, user.name)"><i class="fa fa-comment-o fa-2x" style="color: #9ad1f3;"></i></a>
+            </p>
+            <h4 class="media-heading">{{user.name}}</h3>
+              <p class="text-muted">@{{user.username}}</p>
+          </div>
+        </div>
+      </uib-tab>
 
-    <div class="media" ng-repeat="user in users">
-      <div class="media-object"></div>
-      <div class="media-content">
-        <p class="text-muted pull-right">
-          <a ng-click="chatWith(user.$id, user.name)"><i class="fa fa-comment-o fa-2x" style="color: #9ad1f3;"></i></a>
-        </p>
-        <h4 class="media-heading">{{user.name}}</h3>
-      </div>
-    </div>
+      <uib-tab heading="Chats" classes="btn-sm">
+        <br/>
+        <div class="media" ng-repeat="chat in chats">
+          <div class="media-object"></div>
+          <div class="media-content">
+            <h3 class="media-heading">{{chat.name}}</h3>
+          </div>
+        </div>
+      </uib-tab>
+
+    </uib-tabset>
+
   </div>
 </div>
