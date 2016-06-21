@@ -11,7 +11,7 @@
     var vm = $scope;
     var db = firebase.database();
     var chatId = $routeParams.id;
-    
+
     vm.auth = AccountService.auth;
     vm.model = {};
     vm.model.from = vm.auth.name;
@@ -40,17 +40,39 @@
       var message = snapshot.val();
     });
 
-     // if the messages are empty, add something for fun!
-    vm.messages.$loaded(function() {
+    // if the messages are empty, add something for fun!
+    vm.messages.$loaded(function () {
       if (vm.messages.length === 0) {
         vm.messages.$add({
-          from: "Firebase", 
-          text: "Hey there, start anytime you like!", 
+          from: "Firebase",
+          text: "Hey there, start anytime you like!",
           timestamp: firebase.database.ServerValue.TIMESTAMP
         });
       }
     });
 
+
+    //Load info about other user
+    var userId = chatId.split('-')[0];
+    // db.ref('users/' + userId).on('value', function (snapshot) {
+    //   vm.$apply(function  (){
+    //     vm.with = snapshot.val();
+    //   })
+    // });
+
+    vm.presence = 'not seen';
+
+    //Presence
+    var presenceRef = db.ref('presence/' + userId);
+    presenceRef.on('value', function (snapshot) {
+      var val = snapshot.val();
+      if (val) {
+        if (val === true) vm.presence = 'online';
+        else {
+          presence = new Date(val);
+        }
+      }
+    });
   }
 })();
 

@@ -14,7 +14,7 @@
 
     //list users chats - may need tabs
     var chatsRef = db.ref('chats/');
-    vm.chats = $firebaseArray(chatsRef);
+    vm.chats = $firebaseArray(chatsRef); //Get chats where you are a member
 
     //list users
     var usersRef = db.ref('users/');
