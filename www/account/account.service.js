@@ -41,8 +41,6 @@
         });
 
         console.log('svc: user logged in');
-        console.log(user);
-
         
         var userRef = db.ref('presence/' + user.uid);
         amOnline.on('value', function (snapshot) {

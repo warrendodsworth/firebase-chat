@@ -5,9 +5,9 @@
     .module('app')
     .controller('home.Chat', ChatController);
 
-  ChatController.$inject = ['$scope', '$firebaseArray', '$routeParams', 'AccountService', 'currentAuth'];
+  ChatController.$inject = ['$scope', '$firebaseArray', '$firebaseObject', '$routeParams', 'AccountService', 'currentAuth'];
 
-  function ChatController($scope, $firebaseArray, $routeParams, AccountService, currentAuth) {
+  function ChatController($scope, $firebaseArray, $firebaseObject, $routeParams, AccountService, currentAuth) {
     var vm = $scope;
     var db = firebase.database();
     var chatId = $routeParams.id;
@@ -15,10 +15,6 @@
     vm.auth = AccountService.auth;
     vm.model = {};
     vm.model.from = vm.auth.name;
-
-    console.log('Current Auth');
-    console.log(currentAuth);
-
 
     var chatRef = db.ref('chats/' + chatId);
     //vm.chat = $firebaseObject(chatRef);
@@ -60,17 +56,20 @@
     //   })
     // });
 
-    vm.presence = 'not seen';
-
     //Presence
+
     var presenceRef = db.ref('presence/' + userId);
+    vm.presenceVal = $firebaseObject(presenceRef);
+    vm.$watch('presenceVal.$value', function (val) {
+      if (val)
+        vm.presence = val === true ? 'online' : moment.utc(val).local().fromNow();
+      else
+        vm.presence = 'not seen';
+    })
+
     presenceRef.on('value', function (snapshot) {
       var val = snapshot.val();
       if (val) {
-        if (val === true) vm.presence = 'online';
-        else {
-          presence = new Date(val);
-        }
       }
     });
   }
