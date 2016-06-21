@@ -40,7 +40,7 @@
         templateUrl: 'account/manage.html', controller: 'account.Manage',
         resolve: {
           "currentAuth": ["Auth", function (Auth) {
-            return Auth.$requireSignIn();
+            return Auth.$waitForSignIn();
           }]
         }
       })

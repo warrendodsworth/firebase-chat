@@ -21,27 +21,35 @@
     //Init auth watcher    
     $firebaseAuth().$onAuthStateChanged(function (user) {
       if (user) {
-        user.providerData.forEach(function (profile) {
-          if (profile.providerId == 'facebook.com') {
-            service.auth.name = profile.displayName;
-            service.auth.email = profile.email;
-            service.auth.photoURL = profile.photoURL;
-          }
-        });
+
 
         var currentRef = firebase.database().ref('users/' + user.uid);
         currentRef.once('value', function (snapshot) {
           var isNewUser = !snapshot.exists();
           if (isNewUser) {
-            currentRef.set({
-              name: service.auth.name,
-              email: service.auth.email,
+            user.providerData.forEach(function (profile) {
+              if (profile.providerId == 'facebook.com') {
+                currentRef.set({
+                  name: profile.displayName,
+                  email: profile.email,
+                  photoURL: profile.photoURL
+                });
+                service.auth.name = profile.displayName;
+                service.auth.email = profile.email;
+                service.auth.photoURL = profile.photoURL;
+              }
             });
+          } else {
+            //So that we load the users saved changes when they login, and not overwrite them with provider values
+            var profile = snapshot.val();
+            service.auth.name = profile.name;
+            service.auth.email = profile.email;
+            service.auth.photoURL = profile.photoURL;
           }
         });
 
         console.log('svc: user logged in');
-        
+
         var userRef = db.ref('presence/' + user.uid);
         amOnline.on('value', function (snapshot) {
           if (snapshot.val()) {
@@ -77,11 +85,6 @@
 
 
 
-
-
-
-
-
 // auth.getRedirectResult().then(function (result) {
 //   if (result.credential) {
 //     var token = result.credential.accessToken; //Facebook Access token
@@ -96,37 +99,16 @@
 
 // save the user's profile into the database so we can list users,
 // use them in Security and Firebase Rules, and show profiles
-//example res
-// var authData = {
-//   auth: {
-//     provider: "facebook",
-//     token: {
-//       aud: 'dazzling-fire-5094',
-//       email: 'a@b.com',
-//       email_verified: false,
-//       exp: 1465004038,
-//       auth_time:1464917638
-//     },
-//     uid:"facebook:10154384221665145"
-//   },
-//   expires: 1465004038,
-//   provider: 'facebook', token:"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9",
-//   uid:"facebook:10154384221665145"
-// }
-
-
 // var currentRef = db.ref('users/' + user.uid);
 // currentRef.once('value', function (snapshot) {
 //   var isNewUser = snapshot.exists();
 //   if (isNewUser) {
-//     db.ref('users/' + user.uid).set({
+//     currentRef.set({
 //       name: getName(user),
 //       provider: user.provider
 //     });
 //   }
 // });
-
-
 // function getName(user) {
 //   switch (user.provider) {
 //     case 'password':
@@ -137,11 +119,3 @@
 //       return user.facebook.displayName;
 //   }
 // }
-
-
-// auth.onAuthStateChanged(function (user) {
-//   if (user)
-//     $location.path('/');
-//   else
-//     $location.path('/login');
-// });
