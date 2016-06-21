@@ -9,18 +9,14 @@
 
   function AccountService($location, $rootScope, $firebaseAuth) {
     var service = {};
+    var auth = firebase.auth();
+    var db = firebase.database();
+    var amOnline = db.ref('.info/connected');
     service.auth = {};
 
     //Presence    
-    var db = firebase.database.ref();
-    var amOnline = db('.info/connected');
-    var userRef = db('presence/' + userid);
-    amOnline.on('value', function (snapshot) {
-      if (snapshot.val()) {
-        userRef.onDisconnect().set(firebase.database.ServerValue.TIMESTAMP);
-        userRef.set(true);
-      }
-    });
+    // if (firebase.auth().currentUser) {
+    // }
 
     //Init auth watcher    
     $firebaseAuth().$onAuthStateChanged(function (user) {
@@ -46,6 +42,17 @@
 
         console.log('svc: user logged in');
         console.log(user);
+
+        
+        var userRef = db.ref('presence/' + auth.currentUser.uid);
+
+        amOnline.on('value', function (snapshot) {
+          if (snapshot.val()) {
+            userRef.onDisconnect().set(firebase.database.ServerValue.TIMESTAMP);
+            userRef.set(true);
+          }
+        });
+
         $location.path('/');
       } else {
         console.log('svc: not logged in');
