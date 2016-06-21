@@ -1,22 +1,22 @@
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
     <div class="chat-window">
-      <p ng-repeat="msg in messages" ng-class="{'text-right': msg.name == model.name}">
-        <b ng-show="msg.name != model.name" class="font-sm">{{msg.name}}</b> {{msg.text}}
+      <p ng-repeat="msg in messages" ng-class="{'text-right': msg.from == model.from}">
+        <b ng-show="msg.from != model.from" class="font-sm">{{msg.from}}</b> {{msg.text}}
       </p>
     </div>
 
-    <form name="form" ng-init="model.name = identity.name" ng-submit="$event.keyCode == 13 && createMsg( model )" novalidate
+    <form name="form" ng-submit="$event.keyCode == 13 && sendMessage( model )" novalidate
       class="form-inline">
 
-      <div class="form-group" ng-hide="model.name">
-        <input type='text' ng-model="model.name" placeholder='Name' class="form-control" />
+      <div class="form-group" ng-hide="model.from">
+        <input type='text' ng-model="model.from" placeholder='Name' class="form-control" />
       </div>
 
       <div class="form-group">
         <input type='text' ng-model="model.text" placeholder='Chat here' class="form-control" />
       </div>
-      <input type="submit" class="btn btn-primary" ng-click="createMsg( model )" value="Send" />
+      <input type="submit" class="btn btn-primary" ng-click="sendMessage( model )" value="Send" />
 
     </form>
 

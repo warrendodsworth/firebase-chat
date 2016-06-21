@@ -8,17 +8,16 @@
   NavbarController.$inject = ['$scope', '$location', 'AccountService'];
 
   function NavbarController($scope, $location, AccountService) {
-    var auth = firebase.auth();
     var vm = $scope;
-    
     vm.navCollapse = true;
-
-    vm.identity = AccountService.identity;
+    vm.auth = AccountService.auth;
 
     vm.logout = function () {
-      vm.identity = AccountService.logout(); 
+      vm.auth = AccountService.logout();
       $location.path('/');
     };
+
+    
   }
 })();
 

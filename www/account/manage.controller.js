@@ -1,15 +1,12 @@
-angular.module('app')
+angular
+  .module('app')
 
-  // a factory to create a re-usable Profile object
-  // we pass in a username and get back their synchronized data as an object
-  .factory('Profile', ['$firebaseObject', 
-    function ($firebaseObject) {
-      return function (username) {
-        // create a reference to the database where we will store our data
-        var randomRoomId = Math.round(Math.random() * 100000000);
-        var profileRef = firebase.database().ref('users/' + currentAuth.uid);
 
-        // return it as a synchronized object
+  .factory('Profile', ['$firebaseObject', '$firebaseAuth',
+    function ($firebaseObject, $firebaseAuth) {
+      // a factory to create a re-usable Profile object
+      return function (uid) {
+        var profileRef = firebase.database().ref('users/' + uid);
         return $firebaseObject(profileRef);
       };
     }
@@ -17,7 +14,11 @@ angular.module('app')
 
   .controller('account.Manage', ['$scope', '$routeParams', 'Profile', 'currentAuth',
     function ($scope, $routeParams, Profile, currentAuth) {
+      var user = firebase.auth().currentUser;
       // create a three-way binding to our Profile as $scope.profile
-      Profile('warren').$bindTo($scope, 'profile');
+      Profile(user.uid).$bindTo($scope, 'profile');
     }
-  ]);  
+  ]);
+
+
+// var randomRoomId = Math.round(Math.random() * 100000000);
