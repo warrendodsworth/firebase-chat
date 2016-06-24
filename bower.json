@@ -26,7 +26,8 @@
     "ng-facebook": "^0.1.6",
     "bootstrap": "^3.3.6",
     "font-awesome": "^4.5.0",
-    "chance": "^1.0.0"
+    "chance": "^1.0.0",
+    "moment": "latest"
   },
   "devDependencies": {
     "angular-mocks": "^1.4.8"
