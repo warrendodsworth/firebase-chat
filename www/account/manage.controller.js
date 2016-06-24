@@ -21,4 +21,3 @@ angular
   ]);
 
 
-// var randomRoomId = Math.round(Math.random() * 100000000);
