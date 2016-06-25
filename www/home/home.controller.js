@@ -36,7 +36,7 @@
     vm.users = $firebaseArray(usersRef);
 
     vm.chatWith = function ($uid, name) {
-      var chatId = Math.round(Math.random() * 100000000);
+      var chatId = null;
       var newChat = true;
 
       //existing - query members
@@ -46,22 +46,21 @@
           members.forEach(function (chat) {
             var hasMe = chat.hasChild(myUid);
             var hasYou = chat.hasChild($uid);
-            var numChildren = chat.numChildren();
-            if (hasMe && hasYou && numChildren == 2) {
+            if (hasMe && hasYou && chat.numChildren() == 2) {
               newChat = false;
               chatId = chat.key;
-              console.log('Existing chat - members count ' + numChildren);
+              db.ref('chats/' + chatId).update({ title: name, timestamp: firebase.database.ServerValue.TIMESTAMP });
             }
           });
 
           if (newChat) {
+            chatId = Math.round(Math.random() * 100000000);
             db.ref('members/' + chatId + '/' + $uid).set(true);
             db.ref('members/' + chatId + '/' + myUid).set(true);
+            db.ref('chats/' + chatId).set({ title: name, timestamp: firebase.database.ServerValue.TIMESTAMP });
           }
 
-          db.ref('chats/' + chatId).set({ title: name, timestamp: firebase.database.ServerValue.TIMESTAMP });
-
-          $location.path('/chat/' + chatId);
+          if (chatId) $location.path('/chat/' + chatId);
         });
     };
 
