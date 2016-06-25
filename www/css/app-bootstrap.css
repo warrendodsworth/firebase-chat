@@ -22,15 +22,20 @@ h1, h2, h3, h4 {
   border-radius: 0 0 2px 2px;
 }
 
+
+.img-md {
+  max-height: 50px;
+  max-width: 50px;
+}
+
 .img-sm {
   max-height: 30px;
   max-width: 30px;
 }
 
-.navbar-photo {
-  padding-top: 10px !important;
-  padding-bottom: 10px !important;
-  padding-right: 0 !important;
+.img-xs { 
+  max-height: 23px;
+  max-width: 23px;
 }
 
 .chat-window {

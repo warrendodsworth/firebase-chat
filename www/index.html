@@ -28,11 +28,10 @@
       <div class="navbar-collapse collapse" uib-collapse="navCollapse">
         <ul ng-show="auth.name" class="nav navbar-nav navbar-right">
           <li>
-            <a href="#/manage" class="navbar-photo">
-              <img ng-src="{{auth.photoURL}}" class="img-circle img-sm" alt="Photo" />
+            <a href="#/manage">
+              <img ng-src="{{auth.photoURL}}" class="img-circle img-xs" alt="Photo" />&nbsp; {{auth.name}}
             </a>
           </li>
-          <li><a href="#/manage">{{auth.name}}</a></li>
           <li><a ng-click="logout( )">Logout</a></li>
         </ul>
       </div>
