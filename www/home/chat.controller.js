@@ -33,13 +33,7 @@
 
           //Presence
           var presenceRef = db.ref('presence/' + userId);
-          vm.presenceVal = $firebaseObject(presenceRef);
-          vm.$watch('presenceVal.$value', function (val) {
-            if (val)
-              vm.presence = val === true ? 'online' : moment.utc(val).local().fromNow();
-            else
-              vm.presence = 'not seen';
-          });
+          vm.presence = $firebaseObject(presenceRef);          
         }
       });
       totalMembers = chat.numChildren();
@@ -72,6 +66,13 @@
 })();
 
 
+
+// vm.$watch('presenceVal.$value', function (val) {
+//   if (val)
+//     vm.presence = val === true ? 'online' : moment.utc(val).local().fromNow();
+//   else
+//     vm.presence = 'not seen';
+// });
 
 // var updates = {};
 // updates['/chats/' + chatId + '/lastMessage/' + model.text];

@@ -6,8 +6,9 @@
     .filter('fromNow', fromNow);
 
   function fromNow() {
-    return function (input, optional1) {
-      return moment.utc(input).local().fromNow();
+    return function (input, option1) {
+      var fromNow = moment.utc(input).local().fromNow();
+      return fromNow == 'Invalid date' ? option1 || '' : fromNow;
     }
   }
 })();

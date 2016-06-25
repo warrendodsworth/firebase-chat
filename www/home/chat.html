@@ -6,7 +6,7 @@
       </div>
       <div class="media-body">
         <h4 class="media-heading">{{chat.title}}</h4>
-        <p class="text-muted">{{presence}}</p>
+        <p class="text-muted">{{presence.$value | fromNow: 'online'}}</p>
       </div>
     </div>
 
