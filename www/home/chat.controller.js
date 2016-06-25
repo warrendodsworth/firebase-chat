@@ -27,10 +27,19 @@
         if (member.key != myUid) {
           userId = member.key;
 
-          //Get userId from members using chatId    
+          //User    
           var userRef = db.ref('users/' + userId);
           vm.user = $firebaseObject(userRef);
-          console.log(vm.user);
+
+          //Presence
+          var presenceRef = db.ref('presence/' + userId);
+          vm.presenceVal = $firebaseObject(presenceRef);
+          vm.$watch('presenceVal.$value', function (val) {
+            if (val)
+              vm.presence = val === true ? 'online' : moment.utc(val).local().fromNow();
+            else
+              vm.presence = 'not seen';
+          });
         }
       });
       totalMembers = chat.numChildren();
@@ -59,16 +68,6 @@
       }
     });
 
-
-    //Presence
-    var presenceRef = db.ref('presence/' + userId);
-    vm.presenceVal = $firebaseObject(presenceRef);
-    vm.$watch('presenceVal.$value', function (val) {
-      if (val)
-        vm.presence = val === true ? 'online' : moment.utc(val).local().fromNow();
-      else
-        vm.presence = 'not seen';
-    });
   }
 })();
 
