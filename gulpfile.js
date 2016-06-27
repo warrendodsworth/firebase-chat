@@ -14,6 +14,7 @@ var sh = require('shelljs');
 var bower = require('bower');
 var livereload = require('livereload');
 var mainBowerFiles = require('main-bower-files');
+var Server = require('karma').Server;
 
 var root = './www/'
 var paths = {
@@ -24,6 +25,14 @@ var paths = {
 };
 
 gulp.task('default', ['css', 'js', 'bower']);
+
+//Run test once and exit
+gulp.task('test', function (done) {
+  new Server({
+    configFile: __dirname + '/karma.conf.js',
+    singleRun: true
+  }, done).start();
+});
 
 gulp.task('watch', ['default', 'livereload'], function () {
   gulp.watch(paths.css, ['css']);
