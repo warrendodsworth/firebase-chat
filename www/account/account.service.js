@@ -14,22 +14,17 @@
     var amOnline = db.ref('.info/connected');
     service.auth = {};
 
-    //Presence    
-    // if (firebase.auth().currentUser) {
-    // }
-
     //Init auth watcher    
     $firebaseAuth().$onAuthStateChanged(function (user) {
       if (user) {
 
-
-        var currentRef = firebase.database().ref('users/' + user.uid);
-        currentRef.once('value', function (snapshot) {
-          var isNewUser = !snapshot.exists();
+        var userRef = db.ref('users/' + user.uid);
+        userRef.once('value', function (userSnap) {
+          var isNewUser = !userSnap.exists();
           if (isNewUser) {
             user.providerData.forEach(function (profile) {
               if (profile.providerId == 'facebook.com') {
-                currentRef.set({
+                userRef.set({
                   name: profile.displayName,
                   email: profile.email,
                   photoURL: profile.photoURL
@@ -41,23 +36,22 @@
             });
           } else {
             //So that we load the users saved changes when they login, and not overwrite them with provider values
-            var profile = snapshot.val();
+            var profile = userSnap.val();
             service.auth.name = profile.name;
-            service.auth.email = profile.email;
+            service.auth.email = profile.email; 
             service.auth.photoURL = profile.photoURL;
           }
         });
 
-        console.log('svc: user logged in');
-
-        var userRef = db.ref('presence/' + user.uid);
+        var presenceRef = db.ref('presence/' + user.uid);
         amOnline.on('value', function (snapshot) {
           if (snapshot.val()) {
-            userRef.onDisconnect().set(firebase.database.ServerValue.TIMESTAMP);
-            userRef.set(true);
+            presenceRef.onDisconnect().set(firebase.database.ServerValue.TIMESTAMP);
+            presenceRef.set(true); 
           }
         });
 
+        console.log('svc: user logged in');
         $location.path('/');
       } else {
         console.log('svc: not logged in');
@@ -99,16 +93,6 @@
 
 // save the user's profile into the database so we can list users,
 // use them in Security and Firebase Rules, and show profiles
-// var currentRef = db.ref('users/' + user.uid);
-// currentRef.once('value', function (snapshot) {
-//   var isNewUser = snapshot.exists();
-//   if (isNewUser) {
-//     currentRef.set({
-//       name: getName(user),
-//       provider: user.provider
-//     });
-//   }
-// });
 // function getName(user) {
 //   switch (user.provider) {
 //     case 'password':

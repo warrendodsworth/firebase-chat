@@ -32,7 +32,7 @@
           // $requireSignIn returns a promise so the resolve waits for it to complete
           // If the promise is rejected, it will throw a $stateChangeError (see above)
           "currentAuth": ["Auth", function (Auth) {
-            return Auth.$requireSignIn();
+            return Auth.$waitForSignIn();
           }]
         }
       })
