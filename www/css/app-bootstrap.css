@@ -1,9 +1,10 @@
-body{
+body {
   color: #444;
 }
 
-h1, h2, h3, h4{
+h1, h2, h3, h4 {
   color: #444;
+  margin-top: 3px;
 }
 
 .card {
@@ -19,4 +20,25 @@ h1, h2, h3, h4{
 .card .card-content {
   padding: 20px;
   border-radius: 0 0 2px 2px;
+}
+
+
+.img-md {
+  max-height: 50px;
+  max-width: 50px;
+}
+
+.img-sm {
+  max-height: 30px;
+  max-width: 30px;
+}
+
+.img-xs { 
+  max-height: 23px;
+  max-width: 23px;
+}
+
+.chat-window {
+  max-height: 600px;
+  overflow-y: scroll;
 }

@@ -1,42 +1,62 @@
 <html ng-app="app">
 
 <head>
-  <title>Chio</title>
+  <title>App</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link href="lib/bower.css" rel="stylesheet" />
   <link href="lib/app.css" rel="stylesheet" />
 
   <script src="lib/bower.js"></script>
-  <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
-  <!--<script src="https://www.gstatic.com/firebasejs/3.0.0/firebase.js"></script>-->
-  <script src="https://cdn.firebase.com/libs/angularfire/1.2.0/angularfire.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/3.0.0/firebase.js"></script>
+  <script src="https://cdn.firebase.com/libs/angularfire/2.0.1/angularfire.min.js"></script>
 </head>
 
 <body>
-  <nav ng-controller="navbarController" class="navbar navbar-default">
+  <nav ng-controller="shared.Navbar" class="navbar navbar-default">
     <div class="container">
       <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-        <a class="navbar-brand" href="#/">Chio</a>
+        <button ng-show="auth.name" ng-click="navCollapse = !navCollapse" type="button" class="navbar-toggle collapsed" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          </button>
+        <a class="navbar-brand" href="#/"><i class="fa fa-comment-o"></i> app</a>
       </div>
 
-      <div class="navbar-collapse collapse">
-        <ul class="nav navbar-nav">
-          <li></li>
+      <div class="navbar-collapse navbar-side-menu" ng-hide="navCollapse">
+        <ul ng-show="auth.name" class="nav navbar-nav navbar-right">
+          <li>
+            <a href="#/manage">
+              <img ng-src="{{auth.photoURL}}" class="img-circle img-xs" alt="Photo" />&nbsp; {{auth.name}}
+            </a>
+          </li>
+          <li><a ng-click="logout( )">Logout</a></li>
         </ul>
-        <ul ng-hide="identity.auth" class="nav navbar-nav navbar-right">
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
+    <div ng-view></div>
+  </main>
+
+  <script src="lib/app.js"></script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+<!--<ul ng-hide="identity.auth" class="nav navbar-nav navbar-right">
           <li><a href="#/login">Login</a></li>
-        </ul>
-        <ul ng-show="identity.auth" class="nav navbar-nav navbar-right">
-          <li><a href="#/chat/1">Chat</a></li>
-          <li><a href="#/manage">{{identity.name}}</a></li>
-          <li class="dropdown" uib-dropdown>
+        </ul>-->
+<!--<li class="dropdown" uib-dropdown>
             <a uib-dropdown-toggle class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">
               <i class="fa fa-ellipsis-v"></i>
             </a>
@@ -49,16 +69,4 @@
               <li role="separator" class="divider"></li>
               <li><a ng-click="logout( )">Logout</a></li>
             </ul>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-  <main class="container">
-    <div ng-view></div>
-  </main>
-
-  <script src="lib/app.js"></script>
-</body>
-
-</html>
+          </li>-->

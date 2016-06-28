@@ -14,16 +14,25 @@ var sh = require('shelljs');
 var bower = require('bower');
 var livereload = require('livereload');
 var mainBowerFiles = require('main-bower-files');
+var Server = require('karma').Server;
 
 var root = './www/'
 var paths = {
   css: ['./scss/**/*.scss', root + 'css/**/*.css', '!' + root + 'lib/**.*'],
-  js: [root + 'app.js', root + 'account/**/*.js', root + 'home/**/*.js', root + 'shared/**/*.js'],
+  js: [root + 'app.js', root + 'app.routes.js', root + 'account/**/*.js', root + 'home/**/*.js', root + 'shared/**/*.js'],
   font: root + 'fonts/',
   lib: root + 'lib/'
 };
 
 gulp.task('default', ['css', 'js', 'bower']);
+
+//Run test once and exit
+gulp.task('test', function (done) {
+  new Server({
+    configFile: __dirname + '/karma.conf.js',
+    singleRun: true
+  }, done).start();
+});
 
 gulp.task('watch', ['default', 'livereload'], function () {
   gulp.watch(paths.css, ['css']);

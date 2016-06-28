@@ -1,0 +1,22 @@
+/*Move*/
+
+.repeat-item.ng-enter, .repeat-item.ng-leave {
+    -webkit-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -moz-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -o-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    position: relative;
+    display: block;
+}
+
+.navbar-side-menu {
+    transition: all linear 0.5s;
+}
+
+.navbar-side-menu.ng-show {
+    opacity: 1;
+}
+
+.navbar-side-menu.ng-hide {
+    opacity: 0;
+}

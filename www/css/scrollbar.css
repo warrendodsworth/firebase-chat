@@ -1,0 +1,82 @@
+/* Gmail style scrollbar */
+::-webkit-scrollbar {
+    width: 12px
+}
+::-webkit-scrollbar-thumb {
+    border-width: 1px 1px 1px 2px
+}
+::-webkit-scrollbar-track {
+    border-width: 0
+}
+::-webkit-scrollbar {
+    height: 16px;
+    overflow: visible;
+    width: 16px;
+}
+::-webkit-scrollbar-button {
+    height: 0;
+    width: 0;
+}
+::-webkit-scrollbar-track {
+    background-clip: padding-box;
+    border: solid transparent;
+    border-width: 0 0 0 4px;
+}
+::-webkit-scrollbar-track:hover {
+    background-color: rgba(220,172,0,.05);
+    box-shadow: inset 1px 0 0 rgba(220,172,0,.1);
+}
+
+::-webkit-scrollbar-track:active {
+    background-color: #bbb;
+    box-shadow: inset 1px 0 0 #aaa,inset -1px 0 0 #aaa;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #bbb;
+    background-clip: padding-box;
+    border: solid transparent;
+    border-width: 1px 1px 1px 6px;
+    min-height: 28px;
+    padding: 100px 0 0;
+    box-shadow: inset 1px 1px 0 #aaa,inset 0 -1px 0 #aaa;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #999;
+    box-shadow: inset 1px 1px 1px #888;
+}
+::-webkit-scrollbar-thumb:active {
+    background-color: #999;
+    box-shadow: inset 1px 1px 3px #888;
+}
+::-webkit-scrollbar-track {
+    border-width: 0 1px 0 6px;
+}
+::-webkit-scrollbar-track:hover {
+    background-color: rgba(220,172,0,.035);
+    box-shadow: inset 1px 1px 0 #888,inset -1px -1px 0 #888;
+}
+::-webkit-scrollbar-thumb {
+    border-width: 0 1px 0 6px 
+} 
+::-webkit-scrollbar-corner {
+    background: transparent
+} 
+body::-webkit-scrollbar-track-piece {
+    background-clip: padding-box;
+    background-color: #f5f5f5;
+    border: solid #fff;
+    border-width: 0 0 0 3px;
+    box-shadow: inset 1px 0 0 rgba(220,172,0,.14),inset -1px 0 0 rgba(220,172,0,.07);
+}
+body::-webkit-scrollbar-thumb {
+    border-width: 1px 1px 1px 5px
+}
+body::-webkit-scrollbar-corner {
+    background-clip: padding-box;
+    background-color: #f5f5f5;
+    border: solid #fff;
+    border-width: 3px 0 0 3px;
+    box-shadow: inset 1px 1px 0 rgba(220,172,0,.14);
+}
