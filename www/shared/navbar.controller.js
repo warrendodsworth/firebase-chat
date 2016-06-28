@@ -9,7 +9,7 @@
 
   function NavbarController($scope, $location, AccountService) {
     var vm = $scope;
-    vm.navCollapse = true;
+    vm.navShow = false;
     vm.auth = AccountService.auth;
 
     vm.logout = function () {

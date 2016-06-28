@@ -16,7 +16,7 @@
   <nav ng-controller="shared.Navbar" class="navbar navbar-default">
     <div class="container">
       <div class="navbar-header">
-        <button ng-show="auth.name" ng-click="navCollapse = !navCollapse" type="button" class="navbar-toggle collapsed" aria-expanded="false">
+        <button ng-show="auth.name" ng-click="navShow = !navShow" type="button" class="navbar-toggle collapsed" aria-expanded="false">
           <span class="sr-only">Toggle navigation</span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
@@ -25,7 +25,7 @@
         <a class="navbar-brand" href="#/"><i class="fa fa-comment-o"></i> app</a>
       </div>
 
-      <div class="navbar-collapse navbar-side-menu" ng-hide="navCollapse">
+      <div class="navbar-collapse collapse" ng-show="navShow">
         <ul ng-show="auth.name" class="nav navbar-nav navbar-right">
           <li>
             <a href="#/manage">
