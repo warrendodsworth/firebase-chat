@@ -3,8 +3,8 @@
     .controller('CalculatorController', function CalculatorController($scope) {
       $scope.z = 0;
 
-      $scope.sum = function () {
-        $scope.z = $scope.x + $scope.y;
+      $scope.sum = function (a, b) {
+        $scope.z = a + b;
       };
       
     });
