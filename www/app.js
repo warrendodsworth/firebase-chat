@@ -5,7 +5,7 @@
     'ngRoute',
     'ngAnimate',
     'firebase',
-    'ui.bootstrap',
+    'ui.bootstrap'
   ]);
 
   angular

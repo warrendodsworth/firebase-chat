@@ -27,5 +27,8 @@
     "main-bower-files": "^2.11.1",
     "shelljs": "^0.3.0",
     "uglify-js": "^2.6.1"
+  },
+  "scripts": {
+    "test": "karma start karma.conf.js"
   }
 }
