@@ -5,9 +5,9 @@
     .module('app')
     .controller('home.Home', HomeController);
 
-  HomeController.$inject = ['$scope', '$location', '$firebaseArray', 'chatService', 'currentAuth'];
+  HomeController.$inject = ['$scope', '$location', '$firebaseArray', 'QueryService', 'currentAuth'];
 
-  function HomeController($scope, $location, $firebaseArray, chatService, currentAuth) {
+  function HomeController($scope, $location, $firebaseArray, QueryService, currentAuth) {
     var vm = $scope;
     var db = firebase.database();
     var auth = firebase.auth();
@@ -67,9 +67,14 @@
     vm.resumeChat = function (chatId) {
       db.ref('chats/' + chatId).update({ timestamp: firebase.database.ServerValue.TIMESTAMP });
       $location.path('/chat/' + chatId);
-    }
+    };
   }
 })();
+
+
+
+
+
 
 
 // chatId = Object.keys(members)[0];

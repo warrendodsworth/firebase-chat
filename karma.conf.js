@@ -1,7 +1,7 @@
 // Karma configuration
 // Generated on Mon Jun 27 2016 17:25:54 GMT+1000 (AUS Eastern Standard Time)
 
-module.exports = function(config) {
+module.exports = function (config) {
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
@@ -15,6 +15,9 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+      'www/lib/bower.js',
+      'bower_components/angular-mocks/angular-mocks.js',
+      'www/lib/app.js',
       'test/**/*.spec.js'
     ],
 

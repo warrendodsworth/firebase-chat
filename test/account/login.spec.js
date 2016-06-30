@@ -1,11 +1,19 @@
 /// <reference path="../../typings/index.d.ts" /> 
 
 describe('account.login', function () {
-  beforeEach(function () {
-    browser().navigateTo('/#/login');
-  })
+  //beforeEach(module('app'));
 
-  it('should login with a test account', function() {
+  // var LoginController,
+  //     scope;
+
+  // beforeEach(inject(function ($rootScope, $controller) {
+  //   scope = $rootScope.$new();
+  //   LoginController = $controller('LoginController', {
+  //     $scope: scope
+  //   });
+  // }));
+
+  it('should login with a test account', function () {
     expect(true).toBe(true);
   });
 }); 
