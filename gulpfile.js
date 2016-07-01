@@ -20,7 +20,7 @@ var root = './www/'
 var paths = {
   css: ['./scss/**/*.scss', root + 'css/**/*.css', '!' + root + 'lib/**.*'],
   js: [root + 'app.js', root + 'app.routes.js',
-       root + 'account/**/*.js', root + 'home/**/*.js', root + 'shared/**/*.js', root + 'labs/**/*.js'],
+       root + 'account/**/*.js', root + 'home/**/*.js', root + 'shared/**/*.js', root + 'labs/**/*.lab.js'],
   font: root + 'fonts/',
   lib: root + 'lib/'
 };

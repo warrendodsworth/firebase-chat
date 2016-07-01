@@ -33,7 +33,21 @@
     //  });
 
     //list other users
+
     vm.users = $firebaseArray(usersRef);
+    vm.users.forEach(function (user) {
+      console.log(user.$id);
+      if (user.$id == auth.currentUser.uid) {
+        console.log('Found me');
+      }
+    });
+    
+    usersRef.orderByChild(auth.currentUser.uid).start(1).on('value', function (users) {
+      // users.forEach(function (user) {
+      // });
+      console.log(users.val());
+    });
+
 
     vm.chatWith = function ($uid, name) {
       var chatId = null;
@@ -50,6 +64,7 @@
               newChat = false;
               chatId = chat.key;
               db.ref('chats/' + chatId).update({ title: name, timestamp: firebase.database.ServerValue.TIMESTAMP });
+              return true; // cancels enumeration
             }
           });
 
