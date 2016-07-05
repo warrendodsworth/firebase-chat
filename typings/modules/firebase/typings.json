@@ -1,0 +1,8 @@
+{
+  "resolution": "main",
+  "tree": {
+    "src": "https://github.com/suhdev/firebase-3-typescript/blob/master/firebase.d.ts",
+    "raw": "registry:dt/q#0.0.0+20160613154756",
+    "typings": "https://github.com/suhdev/firebase-3-typescript/blob/master/firebase.d.ts"
+  }
+}
