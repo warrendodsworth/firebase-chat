@@ -1,4 +1,6 @@
-//Node server
+/// <reference path="typings/index.d.ts" /> 
+// Node server
+
 var firebase = require('firebase');
 var config = {
   apiKey: 'AIzaSyC9xO8omc7TxZZ0n4SOQW3bpE-uRryaVD4',
@@ -13,3 +15,4 @@ var ref = db.ref("users");
 ref.once("value", function(snapshot) {
   console.log(snapshot.val());
 });
+
