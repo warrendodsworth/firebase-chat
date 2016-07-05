@@ -16,6 +16,7 @@
     var membersRef = firebase.database().ref('members/');
     var usersRef = firebase.database().ref('users/');
 
+
     //list user's chats
     vm.chats = $firebaseArray(chatsRef);
 

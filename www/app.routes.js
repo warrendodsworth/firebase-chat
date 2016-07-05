@@ -12,35 +12,34 @@
         }
       });
     }])
-    .config(['$routeProvider', routes]);
+    .config(['$routeProvider', '$firebaseAuth', routes]);
 
-  function routes($routeProvider) {
+  function routes($routeProvider, $firebaseAuth) {
     $routeProvider.when('/', {
       templateUrl: 'home/home.html', controller: 'home.Home',
       resolve: {
         // controller will not be loaded until $waitForSignIn resolves
         // $waitForSignIn returns a promise so the resolve waits for it to complete
-        "currentAuth": ["Auth", function (Auth) {
-          return Auth.$requireSignIn();
+        "currentAuth": ["$firebaseAuth", function ($firebaseAuth) {
+          return $firebaseAuth.$requireSignIn();
         }]
       }
     })
       .when('/chat/:id', {
         templateUrl: 'home/chat.html', controller: 'home.Chat',
         resolve: {
-          // Auth refers to our $firebaseAuth wrapper in the example above
           // $requireSignIn returns a promise so the resolve waits for it to complete
           // If the promise is rejected, it will throw a $stateChangeError (see above)
-          "currentAuth": ["Auth", function (Auth) {
-            return Auth.$waitForSignIn();
+          "currentAuth": ["$firebaseAuth", function ($firebaseAuth) {
+            return $firebaseAuth.$waitForSignIn();
           }]
         }
       })
       .when('/manage', {
         templateUrl: 'account/manage.html', controller: 'account.Manage',
         resolve: {
-          "currentAuth": ["Auth", function (Auth) {
-            return Auth.$waitForSignIn();
+          "currentAuth": ["$firebaseAuth", function ($firebaseAuth) {
+            return $firebaseAuth.$waitForSignIn();
           }]
         }
       })

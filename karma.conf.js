@@ -16,8 +16,10 @@ module.exports = function (config) {
     // list of files / patterns to load in the browser
     files: [
       'www/lib/bower.js',
-      'www/lib/app.js',
+      'https://www.gstatic.com/firebasejs/3.0.0/firebase.js',
+      'https://cdn.firebase.com/libs/angularfire/2.0.1/angularfire.min.js',
       'bower_components/angular-mocks/angular-mocks.js',
+      'www/lib/app.js',
       'test/**/*.spec.js'
     ],
 
