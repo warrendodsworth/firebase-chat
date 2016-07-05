@@ -2,7 +2,9 @@
   "version": "1.0.4",
   "name": "angular-fire",
   "description": "Angular + Firebase Start",
-  "dependencies": {},
+  "dependencies": {
+    "firebase": "^3.1.0"
+  },
   "devDependencies": {
     "bower": "^1.7.7",
     "gulp": "^3.5.6",
