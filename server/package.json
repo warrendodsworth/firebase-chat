@@ -1,0 +1,23 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "node project to test firebase queries",
+  "main": "server.js",
+  "scripts": {
+    "test": "node server.js",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "yes"
+  },
+  "keywords": [
+    "node",
+    "firebase"
+  ],
+  "author": "owendodsworth",
+  "license": "ISC",
+  "dependencies": {
+    "firebase": "^3.3.0"
+  }
+}
