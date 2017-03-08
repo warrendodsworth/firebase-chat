@@ -1,8 +1,7 @@
 angular
   .module('app')
 
-
-  .factory('Profile', ['$firebaseObject', '$firebaseAuth',
+  .factory('_profile', ['$firebaseObject', '$firebaseAuth',
     function ($firebaseObject, $firebaseAuth) {
       // a factory to create a re-usable Profile object
       return function (uid) {
@@ -12,11 +11,11 @@ angular
     }
   ])
 
-  .controller('account.Manage', ['$scope', '$routeParams', 'Profile', 'currentAuth',
-    function ($scope, $routeParams, Profile, currentAuth) {
+  .controller('account.Manage', ['$scope', '$routeParams', '_profile', 'currentAuth',
+    function ($scope, $routeParams, _profile, currentAuth) {
       var user = firebase.auth().currentUser;
       // create a three-way binding to our Profile as $scope.profile
-      Profile(user.uid).$bindTo($scope, 'profile');
+      _profile(user.uid).$bindTo($scope, 'profile');
     }
   ]);
 

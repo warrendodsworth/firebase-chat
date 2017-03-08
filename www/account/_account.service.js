@@ -3,11 +3,11 @@
 
   angular
     .module('app')
-    .factory('AccountService', AccountService);
+    .factory('_account', accountService);
 
-  AccountService.$inject = ['$location', '$rootScope', '$firebaseAuth'];
+  accountService.$inject = ['$location', '$rootScope', '$firebaseAuth'];
 
-  function AccountService($location, $rootScope, $firebaseAuth) {
+  function accountService($location, $rootScope, $firebaseAuth) {
     var service = {};
     var auth = firebase.auth();
     var db = firebase.database();

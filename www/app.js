@@ -1,25 +1,25 @@
 (function () {
   'use-strict';
 
-  angular.module('app', [
-    'ngRoute',
-    'ngAnimate',
-    'firebase',
-    'ui.bootstrap',
-  ]);
+  angular
+    .module('app', [
+      'ngRoute',
+      'ngAnimate',
+      'firebase',
+      'ui.bootstrap',
+    ]);
 
   angular
     .module('app')
-    .factory("Auth", ["$firebaseAuth",
+    .factory('Auth', ['$firebaseAuth',
       function ($firebaseAuth) {
         return $firebaseAuth();
       }
     ])
 
-    .run(['$rootScope', 'Auth', function ($rootScope, Auth) {
-      // track status of authentication
+    .run(['$rootScope', '$firebaseAuth', function ($rootScope, $firebaseAuth) {      
       // Auth.$onAuth(function (user) {
-      //   $rootScope.identity.auth = !!user;
+      //   $rootScope.auth = !!user;
       // });
     }])
 
@@ -33,4 +33,4 @@
       firebase.initializeApp(config);
     }]);
 
-} ());
+}());

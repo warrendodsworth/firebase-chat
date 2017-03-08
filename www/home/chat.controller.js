@@ -3,11 +3,11 @@
 
   angular
     .module('app')
-    .controller('home.Chat', ChatController);
+    .controller('home.Chat', chatController);
 
-  ChatController.$inject = ['$scope', '$firebaseArray', '$firebaseObject', '$routeParams', 'AccountService', 'currentAuth'];
+  chatController.$inject = ['$scope', '$firebaseArray', '$firebaseObject', '$routeParams', '_account', 'currentAuth'];
 
-  function ChatController($scope, $firebaseArray, $firebaseObject, $routeParams, AccountService, currentAuth) {
+  function chatController($scope, $firebaseArray, $firebaseObject, $routeParams, _account, currentAuth) {
     var vm = $scope;
     var chatId = $routeParams.id;
     var db = firebase.database();
@@ -17,7 +17,7 @@
     var messagesRef = db.ref('messages/' + chatId);
     var userId, totalMembers;
 
-    vm.auth = AccountService.auth;
+    vm.auth = _account.auth;
     vm.model = {};
     vm.model.from = vm.auth.name;
 
