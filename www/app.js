@@ -11,14 +11,9 @@
 
   angular
     .module('app')
-    .factory('Auth', ['$firebaseAuth',
-      function ($firebaseAuth) {
-        return $firebaseAuth();
-      }
-    ])
 
-    .run(['$rootScope', '$firebaseAuth', function ($rootScope, $firebaseAuth) {      
-      // Auth.$onAuth(function (user) {
+    .run(['$rootScope', '$firebaseAuth', function ($rootScope, $firebaseAuth) {
+      // $firebaseAuth().$onAuth(function (user) {
       //   $rootScope.auth = !!user;
       // });
     }])
