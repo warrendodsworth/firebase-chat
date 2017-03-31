@@ -1,27 +1,27 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "chat", ".", "{87B99E77-2AFA-4273-8534-075F0603FEC2}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "firebase-chat", ".", "{87B99E77-2AFA-4273-8534-075F0603FEC2}"
 	ProjectSection(WebsiteProperties) = preProject
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_56082"
-		Debug.AspNetCompiler.PhysicalPath = "..\chat\"
+		Debug.AspNetCompiler.PhysicalPath = "..\firebase-chat\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_56082\"
 		Debug.AspNetCompiler.Updateable = "true"
 		Debug.AspNetCompiler.ForceOverwrite = "true"
 		Debug.AspNetCompiler.FixedNames = "false"
 		Debug.AspNetCompiler.Debug = "True"
 		Release.AspNetCompiler.VirtualPath = "/localhost_56082"
-		Release.AspNetCompiler.PhysicalPath = "..\chat\"
+		Release.AspNetCompiler.PhysicalPath = "..\firebase-chat\"
 		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_56082\"
 		Release.AspNetCompiler.Updateable = "true"
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "56082"
-		SlnRelativePath = "..\chat\"
+		SlnRelativePath = "..\firebase-chat\"
 	EndProjectSection
 EndProject
 Global

@@ -5,7 +5,7 @@
     .module('app')
     .service('_chat', Service);
 
-  function Service() {
+  function chatService() {
 
     //https://firebase.googleblog.com/2013/10/queries-part-1-common-sql-queries.html#byid
     //https://gist.github.com/katowulf/6598238
@@ -20,6 +20,7 @@
           }
         }
       });
+
       return base;
     }
   }
