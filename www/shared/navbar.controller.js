@@ -3,21 +3,20 @@
 
   angular
     .module('app')
-    .controller('shared.Navbar', NavbarController);
+    .controller('shared.Navbar', navbarController);
 
-  NavbarController.$inject = ['$scope', '$location', 'AccountService'];
+  navbarController.$inject = ['$scope', '$location', '_account'];
 
-  function NavbarController($scope, $location, AccountService) {
+  function navbarController($scope, $location, _account) {
     var vm = $scope;
     vm.navCollapse = true;
-    vm.auth = AccountService.auth;
+    vm.auth = _account.auth;
 
     vm.logout = function () {
-      vm.auth = AccountService.logout();
+      vm.auth = _account.logout();
       $location.path('/');
     };
-
-    
   }
+
 })();
 
