@@ -10,6 +10,7 @@ var less = require('gulp-less');
 var jshint = require('gulp-jshint');
 var stylish = require('jshint-stylish');
 var fixmyjs = require("gulp-fixmyjs");
+var sourcemaps = require('gulp-sourcemaps');
 var sh = require('shelljs');
 var bower = require('bower');
 var livereload = require('livereload');
@@ -46,6 +47,7 @@ gulp.task('livereload', function () {
 
 gulp.task('js', function (done) {
   gulp.src(paths.js)
+    .pipe(sourcemaps.init())    
     .pipe(jshint())
     .pipe(jshint.reporter(stylish))
     // .pipe(fixmyjs({
@@ -53,6 +55,8 @@ gulp.task('js', function (done) {
     // }))
     .pipe(filter('**/*.js'))
     .pipe(concat('app.js'))
+    .pipe(sourcemaps.write('.'))
+    .pipe(filter('**/*.js'))
     .pipe(gulp.dest(paths.lib))
     .pipe(uglify())
     .on('error', handleError)
@@ -63,8 +67,10 @@ gulp.task('js', function (done) {
 
 gulp.task('css', function (done) {
   gulp.src(paths.css)
+    .pipe(sourcemaps.init())  
     .pipe(less())
     .pipe(concat('app.css'))
+    .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest(paths.lib))
     .pipe(minifyCss({
       keepSpecialComments: 0
