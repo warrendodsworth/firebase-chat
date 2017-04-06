@@ -19,6 +19,7 @@
       if (user) {
 
         var userRef = db.ref('users/' + user.uid);
+        
         userRef.once('value', function (userSnap) {
           var isNewUser = !userSnap.exists();
           if (isNewUser) {

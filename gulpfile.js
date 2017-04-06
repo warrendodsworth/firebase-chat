@@ -13,16 +13,16 @@ var fixmyjs = require("gulp-fixmyjs");
 var sourcemaps = require('gulp-sourcemaps');
 var sh = require('shelljs');
 var bower = require('bower');
-var livereload = require('livereload');
+var livereload = require('gulp-livereload');
 var mainBowerFiles = require('main-bower-files');
 var Server = require('karma').Server;
 
 var root = './www/'
 var paths = {
-  css: ['./scss/**/*.scss', root + 'css/**/*.css', '!' + root + 'lib/**.*'],
-  js: [root + 'app.js', root + 'app.routes.js', root + 'account/**/*.js', root + 'home/**/*.js', root + 'shared/**/*.js'],
+  css: ['./less/**/*.less', './less/**/*.css'],
+  js: ['./_app.js', './_app.routes.js','./_account/**/*.js', './home/**/*.js', './shared/**/*.js'],
   font: root + 'fonts/',
-  lib: root + 'lib/'
+  lib: root
 };
 
 gulp.task('default', ['css', 'js', 'bower']);
@@ -53,14 +53,13 @@ gulp.task('js', function (done) {
     // .pipe(fixmyjs({
     //   //Jshint options      
     // }))
-    .pipe(filter('**/*.js'))
     .pipe(concat('app.js'))
-    .pipe(sourcemaps.write('.'))
+    .pipe(sourcemaps.write())
     .pipe(filter('**/*.js'))
     .pipe(gulp.dest(paths.lib))
     .pipe(uglify())
     .on('error', handleError)
-    .pipe(rename({ suffix: '.min' }))
+    .pipe(rename('app.min.js'))
     .pipe(gulp.dest(paths.lib))
     .on('end', done);
 });
@@ -70,13 +69,13 @@ gulp.task('css', function (done) {
     .pipe(sourcemaps.init())  
     .pipe(less())
     .pipe(concat('app.css'))
-    .pipe(sourcemaps.write('.'))
+    .pipe(sourcemaps.write())
     .pipe(gulp.dest(paths.lib))
     .pipe(minifyCss({
       keepSpecialComments: 0
     }))
     .on('error', handleError)
-    .pipe(rename({ extname: '.min.css' }))
+    .pipe(rename('app.min.css'))
     .pipe(gulp.dest(paths.lib))
     .on('end', done);
 });
