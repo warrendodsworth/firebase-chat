@@ -3,11 +3,11 @@
 
   angular
     .module('app')
-    .controller('account.Login', LoginController);
+    .controller('account.login', loginController);
 
-  LoginController.$inject = ['$scope', '$location', '$firebaseAuth', '_account'];
+  loginController.$inject = ['$scope', '$location', '$firebaseAuth', '_account'];
 
-  function LoginController($scope, $location, $firebaseAuth, _account) {
+  function loginController($scope, $location, $firebaseAuth, _account) {
     var vm = $scope;
     var auth = firebase.auth();
     var provider = new firebase.auth.FacebookAuthProvider();

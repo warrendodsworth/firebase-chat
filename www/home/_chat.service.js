@@ -3,7 +3,7 @@
 
   angular
     .module('app')
-    .service('_chat', chatService);
+    .service('_chat', Service);
 
   function chatService() {
 

@@ -3,7 +3,7 @@
 
   angular
     .module('app')
-    .controller('home.Chat', chatController);
+    .controller('chat', chatController);
 
   chatController.$inject = ['$scope', '$firebaseArray', '$firebaseObject', '$routeParams', '_account', 'currentAuth'];
 

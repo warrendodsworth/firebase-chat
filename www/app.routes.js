@@ -16,7 +16,7 @@
 
   function routes($routeProvider) {
     $routeProvider.when('/', {
-      templateUrl: 'home/home.html', controller: 'home.Home',
+      templateUrl: 'home/home.html', controller: 'home',
       resolve: {
         // controller will not be loaded until $waitForSignIn resolves
         // $waitForSignIn returns a promise so the resolve waits for it to complete
@@ -26,7 +26,7 @@
       }
     })
       .when('/chat/:id', {
-        templateUrl: 'home/chat.html', controller: 'home.Chat',
+        templateUrl: 'home/chat.html', controller: 'chat',
         resolve: {
           // Auth refers to our $firebaseAuth wrapper in the example above
           // $requireSignIn returns a promise so the resolve waits for it to complete
@@ -37,7 +37,7 @@
         }
       })
       .when('/manage', {
-        templateUrl: 'account/manage.html', controller: 'account.Manage',
+        templateUrl: 'account/manage.html', controller: 'account.manage',
         resolve: {
           "currentAuth": ['$firebaseAuth', function ($firebaseAuth) {
             return $firebaseAuth().$waitForSignIn();
@@ -45,7 +45,7 @@
         }
       })
       .when('/login', {
-        templateUrl: 'account/login.html', controller: 'account.Login'
+        templateUrl: 'account/login.html', controller: 'account.login'
       })
 
       .otherwise('/login');

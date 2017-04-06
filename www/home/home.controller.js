@@ -3,11 +3,11 @@
 
   angular
     .module('app')
-    .controller('home.Home', HomeController);
+    .controller('home', homeController);
 
-  HomeController.$inject = ['$scope', '$location', '$firebaseArray', '_chat', 'currentAuth'];
+  homeController.$inject = ['$scope', '$location', '$firebaseArray', '_chat', 'currentAuth'];
 
-  function HomeController($scope, $location, $firebaseArray, _chat, currentAuth) {
+  function homeController($scope, $location, $firebaseArray, _chat, currentAuth) {
     var vm = $scope;
     var db = firebase.database();
     var auth = firebase.auth();
@@ -22,7 +22,7 @@
     //chats join members 
     // chatsRef.once('value', function (chats) {
     //   membersRef.once('value', function (members) {
-    //     vm.chats = chatService.extend({}, members.val(), chats.val());
+    //     vm.chats = _chat.extend({}, members.val(), chats.val());
     //   });
     // });
 

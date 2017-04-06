@@ -13,9 +13,10 @@
     vm.auth = _account.auth;
 
     vm.logout = function () {
-      vm.auth = AccountService.logout();
+      vm.auth = _account.logout();
       $location.path('/');
-    };    
+    };
   }
+
 })();
 
