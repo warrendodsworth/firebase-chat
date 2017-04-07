@@ -3,7 +3,16 @@
 
   angular
     .module('app')
-    .controller('shared.navbar', navbarController);
+    .directive('navbar', navbarDirective)
+    .controller('navbarController', navbarController);
+
+  function navbarDirective() {
+    return {
+      restrict: 'E',
+      controller: navbarController,
+      templateUrl: '/www/shared/navbar.html',
+    };
+  }
 
   navbarController.$inject = ['$scope', '$location', '_account'];
 
@@ -19,4 +28,3 @@
   }
 
 })();
-
