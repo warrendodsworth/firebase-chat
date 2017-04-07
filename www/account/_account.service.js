@@ -51,15 +51,14 @@
           }
         });
 
-        console.log('svc: user logged in');
+        console.log('svc - logged in');
         $location.path('/');
       } else {
-        console.log('svc: not logged in');
+        console.log('svc - not logged in');
         $location.path('/login');
       }
     });
 
-    //Logout    
     service.logout = function () {
       $firebaseAuth().$signOut();
       service.auth = {};

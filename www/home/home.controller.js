@@ -11,10 +11,11 @@
     var vm = $scope;
     var db = firebase.database();
     var auth = firebase.auth();
+    
     var myUid = auth.currentUser.uid;
-    var chatsRef = firebase.database().ref('chats/');
-    var membersRef = firebase.database().ref('members/');
-    var usersRef = firebase.database().ref('users/');
+    var chatsRef = db.ref('chats/');
+    var membersRef = db.ref('members/');
+    var usersRef = db.ref('users/');
 
     //list user's chats
     vm.chats = $firebaseArray(chatsRef);

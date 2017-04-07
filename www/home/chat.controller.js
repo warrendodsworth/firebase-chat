@@ -27,11 +27,9 @@
         if (member.key != myUid) {
           userId = member.key;
 
-          //User    
           var userRef = db.ref('users/' + userId);
           vm.user = $firebaseObject(userRef);
 
-          //Presence
           var presenceRef = db.ref('presence/' + userId);
           vm.presence = $firebaseObject(presenceRef);          
         }

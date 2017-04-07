@@ -10,6 +10,7 @@ var less = require('gulp-less');
 var jshint = require('gulp-jshint');
 var stylish = require('jshint-stylish');
 var fixmyjs = require("gulp-fixmyjs");
+var stripDebug = require('gulp-strip-debug');
 var sourcemaps = require('gulp-sourcemaps');
 var sh = require('shelljs');
 var bower = require('bower');
@@ -21,7 +22,7 @@ var root = './www/'
 var paths = {
   css: ['./less/**/*.less'],
   js: [root + 'app.js', root + 'app.routes.js', root + 'account/**/*.js', root + 'home/**/*.js', root + 'shared/**/*.js'],
-  font: root + 'fonts/',
+  font: root + 'lib/fonts/',
   lib: root + 'lib/'
 };
 
@@ -53,9 +54,11 @@ gulp.task('js', function (done) {
     //   //Jshint options      
     // }))
     .pipe(concat('app.js'))
-    .pipe(uglify())
+    .pipe(sourcemaps.write('.'))
+    .pipe(filter('**/*.js'))    
+    .pipe(stripDebug())
+    // .pipe(uglify())
     .on('error', handleError)
-    .pipe(sourcemaps.write())
     .pipe(gulp.dest(paths.lib))
     .on('end', done);
 });
@@ -69,7 +72,7 @@ gulp.task('css', function (done) {
       keepSpecialComments: 0
     }))
     .on('error', handleError)
-    .pipe(sourcemaps.write())
+    .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest(paths.lib))
     .on('end', done);
 });

@@ -6,11 +6,24 @@
 
   <link href="lib/bower.css" rel="stylesheet" />
   <link href="lib/app.css" rel="stylesheet" />
+  <!--<link href="lib/app.css.map" rel="map" />-->
+  <!--<link href="lib/app.js.map" rel="map" />-->
 
   <script src="lib/bower.js"></script>
   <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
   <script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
-  <script src="lib/app.js"></script>
+  <!--<script src="lib/app.js"></script>-->
+
+  <script src="app.js"></script>
+  <script src="app.routes.js"></script>
+  <script src="account/_account.service.js"></script>
+  <script src="account/login.controller.js"></script>
+  <script src="account/manage.controller.js"></script>
+  <script src="home/_chat.service.js"></script>
+  <script src="home/chat.controller.js"></script>
+  <script src="home/home.controller.js"></script>
+  <script src="shared/fromNow.js"></script>
+  <script src="shared/navbar.directive.js"></script>
 </head>
 
 <body>
@@ -22,27 +35,3 @@
 </body>
 
 </html>
-
-
-
-
-
-
-
-<!--<ul ng-hide="identity.auth" class="nav navbar-nav navbar-right">
-          <li><a href="#/login">Login</a></li>
-        </ul>-->
-<!--<li class="dropdown" uib-dropdown>
-            <a uib-dropdown-toggle class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">
-              <i class="fa fa-ellipsis-v"></i>
-            </a>
-            <ul uib-dropdown-menu class="dropdown-menu">
-              <li>
-                <a href="#/manage" class="text-muted">
-                  {{identity.name}}
-                </a>
-              </li>
-              <li role="separator" class="divider"></li>
-              <li><a ng-click="logout( )">Logout</a></li>
-            </ul>
-          </li>-->
