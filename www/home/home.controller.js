@@ -67,7 +67,7 @@
     vm.resumeChat = function (chatId) {
       db.ref('chats/' + chatId).update({ timestamp: firebase.database.ServerValue.TIMESTAMP });
       $location.path('/chat/' + chatId);
-    }
+    };
   }
 })();
 

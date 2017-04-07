@@ -11,13 +11,11 @@
 
   angular
     .module('app')
-
     .run(['$rootScope', '$firebaseAuth', function ($rootScope, $firebaseAuth) {
       // $firebaseAuth().$onAuth(function (user) {
       //   $rootScope.auth = !!user;
       // });
     }])
-
     .config(['$httpProvider', function ($httpProvider) {
       var config = {
         apiKey: 'AIzaSyC9xO8omc7TxZZ0n4SOQW3bpE-uRryaVD4',

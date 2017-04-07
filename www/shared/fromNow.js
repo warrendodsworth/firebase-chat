@@ -9,6 +9,6 @@
     return function (input, option1) {
       var fromNow = moment.utc(input).local().fromNow();
       return fromNow == 'Invalid date' ? option1 || '' : fromNow;
-    }
+    };
   }
 })();

@@ -3,7 +3,7 @@
 
   angular
     .module('app')
-    .controller('shared.Navbar', navbarController);
+    .controller('shared.navbar', navbarController);
 
   navbarController.$inject = ['$scope', '$location', '_account'];
 

@@ -19,7 +19,7 @@ var Server = require('karma').Server;
 
 var root = './www/'
 var paths = {
-  css: ['./scss/**/*.scss', root + 'css/**/*.css', '!' + root + 'lib/**.*'],
+  css: ['./less/**/*.less'],
   js: [root + 'app.js', root + 'app.routes.js', root + 'account/**/*.js', root + 'home/**/*.js', root + 'shared/**/*.js'],
   font: root + 'fonts/',
   lib: root + 'lib/'
@@ -27,7 +27,6 @@ var paths = {
 
 gulp.task('default', ['css', 'js', 'bower']);
 
-//Run test once and exit
 gulp.task('test', function (done) {
   new Server({
     configFile: __dirname + '/karma.conf.js',
@@ -53,14 +52,10 @@ gulp.task('js', function (done) {
     // .pipe(fixmyjs({
     //   //Jshint options      
     // }))
-    .pipe(filter('**/*.js'))
     .pipe(concat('app.js'))
-    .pipe(sourcemaps.write('.'))
-    .pipe(filter('**/*.js'))
-    .pipe(gulp.dest(paths.lib))
     .pipe(uglify())
     .on('error', handleError)
-    .pipe(rename({ suffix: '.min' }))
+    .pipe(sourcemaps.write())
     .pipe(gulp.dest(paths.lib))
     .on('end', done);
 });
@@ -70,13 +65,11 @@ gulp.task('css', function (done) {
     .pipe(sourcemaps.init())  
     .pipe(less())
     .pipe(concat('app.css'))
-    .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest(paths.lib))
     .pipe(minifyCss({
       keepSpecialComments: 0
     }))
     .on('error', handleError)
-    .pipe(rename({ extname: '.min.css' }))
+    .pipe(sourcemaps.write())
     .pipe(gulp.dest(paths.lib))
     .on('end', done);
 });
