@@ -22,7 +22,7 @@ var root = './www/'
 var paths = {
   css: ['./less/**/*.less'],
   js: [root + 'app.js', root + 'app.routes.js', root + 'account/**/*.js', root + 'home/**/*.js', root + 'shared/**/*.js'],
-  font: root + 'lib/fonts/',
+  font: root + 'fonts/',
   lib: root + 'lib/'
 };
 

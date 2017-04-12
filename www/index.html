@@ -1,4 +1,4 @@
-<html ng-app="app">
+<html>
 
 <head>
   <title>App</title>
@@ -10,23 +10,12 @@
   <!--<link href="lib/app.js.map" rel="map" />-->
 
   <script src="lib/bower.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/3.7.6/firebase.js"></script>
   <script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
-  <!--<script src="lib/app.js"></script>-->
-
-  <script src="app.js"></script>
-  <script src="app.routes.js"></script>
-  <script src="account/_account.service.js"></script>
-  <script src="account/login.controller.js"></script>
-  <script src="account/manage.controller.js"></script>
-  <script src="home/_chat.service.js"></script>
-  <script src="home/chat.controller.js"></script>
-  <script src="home/home.controller.js"></script>
-  <script src="shared/fromNow.js"></script>
-  <script src="shared/navbar.directive.js"></script>
+  <script src="lib/app.js"></script>
 </head>
 
-<body>
+<body ng-app="app">
   <navbar></navbar>
 
   <main class="container">

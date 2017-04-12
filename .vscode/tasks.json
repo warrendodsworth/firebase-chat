@@ -7,9 +7,15 @@
   "args": [
     ""
   ],
-  "tasks": [{
-    "taskName": "watch",
-    "isBuildCommand": true,
-    "showOutput": "silent"
-  }]
+  "tasks": [
+    {
+      "taskName": "watch",
+      "isBuildCommand": true,
+      "showOutput": "silent",
+      "problemMatcher": [
+        "$lessCompile",
+        "$jshint"
+      ]
+    }
+  ]
 }

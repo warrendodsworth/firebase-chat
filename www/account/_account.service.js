@@ -24,14 +24,13 @@
           if (isNewUser) {
             user.providerData.forEach(function (profile) {
               if (profile.providerId == 'facebook.com') {
-                userRef.set({
+                var user = {
                   name: profile.displayName,
                   email: profile.email,
                   photoURL: profile.photoURL
-                });
-                service.auth.name = profile.displayName;
-                service.auth.email = profile.email;
-                service.auth.photoURL = profile.photoURL;
+                };
+                userRef.set(user);
+                service.auth = user;
               }
             });
           } else {
