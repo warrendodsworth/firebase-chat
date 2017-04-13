@@ -21,8 +21,6 @@
     vm.isNavCollapsed = true;
 
     vm.$on('login', function (e, a) {
-      console.log('nav broadcast');
-      console.log(a);
       vm.auth = _account.auth;
     })
 

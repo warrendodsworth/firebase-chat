@@ -5,9 +5,9 @@
     .module('app')
     .controller('chat', chatController);
 
-  chatController.$inject = ['$scope', '$firebaseArray', '$firebaseObject', '$routeParams', 'auth'];
+  chatController.$inject = ['$scope', '$firebaseArray', '$firebaseObject', '$routeParams', '_account', 'auth'];
 
-  function chatController($scope, $firebaseArray, $firebaseObject, $routeParams, auth) {
+  function chatController($scope, $firebaseArray, $firebaseObject, $routeParams, _account, auth) {
     var vm = $scope;
     var chatId = $routeParams.id;
     var db = firebase.database();
@@ -17,9 +17,7 @@
     var messagesRef = db.ref('messages/' + chatId);
     var userId, totalMembers;
 
-    console.log(auth);
-
-    vm.auth = auth;
+    vm.auth = _account.auth;
     vm.model = {};
     vm.model.from = vm.auth.displayName;
 
