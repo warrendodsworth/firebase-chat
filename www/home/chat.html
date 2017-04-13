@@ -2,7 +2,7 @@
   <div class="col-md-6 col-md-offset-3">
     <div class="media">
       <div class="media-left">
-        <img ng-src="{{user.photoURL}}" ng-if="user.photoURL" class="media-object img-circle img-md" alt="{{user.name}}" />
+        <img ng-src="{{user.photoURL}}" ng-if="user.photoURL" class="media-object img-circle img-md" alt="{{user.displayName}}" />
       </div>
       <div class="media-body">
         <h4 class="media-heading">{{chat.title}}</h4>
@@ -17,9 +17,6 @@
     </div>
 
     <form name="form" ng-submit="$event.keyCode == 13 && sendMessage( model )" novalidate class="form-inline">
-      <div class="form-group" ng-hide="model.from">
-        <input type='text' ng-model="model.from" placeholder='Name' class="form-control" />
-      </div>
       <div class="form-group">
         <input type='text' ng-model="model.text" placeholder='Type a message' class="form-control" />
       </div>

@@ -7,14 +7,28 @@ h1, h2, h3, h4 {
   margin-top: 3px;
 }
 
+a {
+  &.clear {
+    text-decoration: none;
+  }
+}
+
 .card {
   position: relative;
   overflow: hidden;
-  margin: 0.5rem 0 1rem 0;
+  margin: 5px 0;
+  padding: 5px 5px 0;
   background-color: #fff;
-  transition: box-shadow .25s;
-  border-radius: 2px;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  border-radius: 3px;
+
+  &:hover{
+    background-color: rgba(235, 235, 235, 0.32);
+  }
+
+  &.card-shadow {
+    transition: box-shadow .25s;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  }
 }
 
 .card .card-content {
@@ -22,6 +36,11 @@ h1, h2, h3, h4 {
   border-radius: 0 0 2px 2px;
 }
 
+
+.chat-window {
+  max-height: 600px;
+  overflow-y: scroll;
+}
 
 .img-md {
   max-height: 50px;
@@ -36,9 +55,4 @@ h1, h2, h3, h4 {
 .img-xs { 
   max-height: 23px;
   max-width: 23px;
-}
-
-.chat-window {
-  max-height: 600px;
-  overflow-y: scroll;
 }

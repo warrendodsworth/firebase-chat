@@ -5,20 +5,20 @@
     .module('app')
     .controller('home', homeController);
 
-  homeController.$inject = ['$scope', '$location', '$firebaseArray', '_chat', 'currentAuth'];
+  homeController.$inject = ['$scope', '$location', '$firebaseArray', '_chat', 'auth'];
 
-  function homeController($scope, $location, $firebaseArray, _chat, currentAuth) {
+  function homeController($scope, $location, $firebaseArray, _chat, auth) {
     var vm = $scope;
     var db = firebase.database();
     var auth = firebase.auth();
-    
+
     var myUid = auth.currentUser.uid;
     var chatsRef = db.ref('chats/');
     var membersRef = db.ref('members/');
     var usersRef = db.ref('users/');
 
-    //list user's chats
     vm.chats = $firebaseArray(chatsRef);
+    vm.users = $firebaseArray(usersRef);
 
     //chats join members 
     // chatsRef.once('value', function (chats) {
@@ -33,14 +33,10 @@
     //      });
     //  });
 
-    //list other users
-    vm.users = $firebaseArray(usersRef);
 
     vm.chatWith = function ($uid, name) {
-      var chatId = null;
-      var newChat = true;
+      var chatId = null, newChat = true;
 
-      //existing - query members
       membersRef.orderByChild($uid)
         .once('value').then(function (members) {
 
@@ -50,6 +46,7 @@
             if (hasMe && hasYou && chat.numChildren() == 2) {
               newChat = false;
               chatId = chat.key;
+
               db.ref('chats/' + chatId).update({ title: name, timestamp: firebase.database.ServerValue.TIMESTAMP });
             }
           });
@@ -83,11 +80,3 @@
 //     'facebook:10154384221665146': true
 //   }
 // };
-
-// angular.forEach(chatMembers, function (val, memberId) {
-//   if (memberId == $uid) {
-//     newChatId = chatId;
-//     newChat = false;
-//     console.log('I already have an open chat with you');
-//   }
-// });

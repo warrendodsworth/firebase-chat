@@ -23,6 +23,7 @@ var paths = {
   css: ['./less/**/*.less'],
   js: [root + 'app.js', root + 'app.routes.js', root + 'account/**/*.js', root + 'home/**/*.js', root + 'shared/**/*.js'],
   font: root + 'fonts/',
+  html: root + '**/*.html',
   lib: root + 'lib/'
 };
 
@@ -42,7 +43,7 @@ gulp.task('watch', ['default', 'livereload'], function () {
 
 gulp.task('livereload', function () {
   var server = livereload.createServer();
-  server.watch([paths.css, paths.js]);
+  server.watch([paths.css, paths.js, paths.html]);
 });
 
 gulp.task('js', function (done) {
@@ -56,7 +57,7 @@ gulp.task('js', function (done) {
     .pipe(concat('app.js'))
     .pipe(sourcemaps.write('.'))
     .pipe(filter('**/*.js'))    
-    .pipe(stripDebug())
+    //.pipe(stripDebug())
     // .pipe(uglify())
     .on('error', handleError)
     .pipe(gulp.dest(paths.lib))

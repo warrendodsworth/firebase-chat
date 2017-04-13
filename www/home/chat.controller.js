@@ -5,9 +5,9 @@
     .module('app')
     .controller('chat', chatController);
 
-  chatController.$inject = ['$scope', '$firebaseArray', '$firebaseObject', '$routeParams', '_account', 'currentAuth'];
+  chatController.$inject = ['$scope', '$firebaseArray', '$firebaseObject', '$routeParams', 'auth'];
 
-  function chatController($scope, $firebaseArray, $firebaseObject, $routeParams, _account, currentAuth) {
+  function chatController($scope, $firebaseArray, $firebaseObject, $routeParams, auth) {
     var vm = $scope;
     var chatId = $routeParams.id;
     var db = firebase.database();
@@ -17,9 +17,11 @@
     var messagesRef = db.ref('messages/' + chatId);
     var userId, totalMembers;
 
-    vm.auth = _account.auth;
+    console.log(auth);
+
+    vm.auth = auth;
     vm.model = {};
-    vm.model.from = vm.auth.name;
+    vm.model.from = vm.auth.displayName;
 
     //get other users id for presence
     membersRef.once('value', function (chat) {

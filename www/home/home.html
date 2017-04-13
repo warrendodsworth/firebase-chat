@@ -4,29 +4,36 @@
     <uib-tabset type="pills">
 
       <uib-tab heading="Users">
-        <br/>
-        <div class="media" ng-repeat="user in users">
+        <br />
+        <div class="media card" ng-repeat="user in users">
           <div class="media-object"></div>
           <div class="media-content">
-            <p class="text-muted pull-right">
-              <a ng-click="chatWith(user.$id, user.name)"><i class="fa fa-comment-o fa-2x" style="color: #9ad1f3;"></i></a>
-            </p>
-            <h4 class="media-heading">{{user.displayName}}</h3>
+            <a ng-click="chatWith(user.$id, user.displayName)" class="clear">
+              <p class="text-muted pull-right">
+                <i class="fa fa-comment-o fa-2x" style="color: #9ad1f3;"></i>
+              </p>
+              <h4 class="media-heading">{{user.displayName}}</h4>
               <p class="text-muted">@{{user.username}}</p>
+            </a>
           </div>
         </div>
       </uib-tab>
 
-      <uib-tab heading="Chats" classes="btn-sm">
-        <br/>
-        <div class="media" ng-repeat="chat in chats">
+      <uib-tab heading="Chats">
+        <br />
+        <div class="media card" ng-repeat="chat in chats">
           <div class="media-object"></div>
           <div class="media-content">
-            <p class="text-muted pull-right">
-              <a ng-click="resumeChat(chat.$id)"><i class="fa fa-comment-o fa-2x" style="color: #9ad1f3;"></i></a>
-            </p>
-            <h3 class="media-heading">{{chat.title}}</h3>
-            <p class="text-muted">{{chat.lastMessage}} <span class="pull-right">{{chat.timestamp|fromNow}}</span></p>
+            <a ng-click="resumeChat(chat.$id)" class="clear">
+              <p class="text-muted pull-right">
+                <i class="fa fa-comment-o fa-2x" style="color: #9ad1f3;"></i>
+              </p>
+              <h4 class="media-heading">{{chat.title}}</h4>
+              <p class="text-muted">
+                {{chat.lastMessage}}
+                <span class="pull-right">{{chat.timestamp|fromNow}}</span>
+              </p>
+            </a>
           </div>
         </div>
       </uib-tab>

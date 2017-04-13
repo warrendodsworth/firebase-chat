@@ -14,12 +14,17 @@
     };
   }
 
-  navbarController.$inject = ['$scope', '$location', '_account'];
+  navbarController.$inject = ['$scope', '$rootScope', '$location', '_account'];
 
-  function navbarController($scope, $location, _account) {
+  function navbarController($scope, $rootScope, $location, _account) {
     var vm = $scope;
-    vm.navCollapse = true;
-    vm.auth = _account.auth;
+    vm.isNavCollapsed = true;
+
+    vm.$on('login', function (e, a) {
+      console.log('nav broadcast');
+      console.log(a);
+      vm.auth = _account.auth;
+    })
 
     vm.logout = function () {
       vm.auth = _account.logout();

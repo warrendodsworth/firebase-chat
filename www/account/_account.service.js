@@ -8,63 +8,52 @@
   accountService.$inject = ['$location', '$rootScope', '$firebaseAuth'];
 
   function accountService($location, $rootScope, $firebaseAuth) {
-    var service = {};
+    var svc = {};
     var auth = firebase.auth();
     var db = firebase.database();
     var amOnline = db.ref('.info/connected');
-    service.auth = {};
+    svc.auth = null;
 
-    //Init auth watcher    
     $firebaseAuth().$onAuthStateChanged(function (user) {
       if (user) {
-
         var userRef = db.ref('users/' + user.uid);
         userRef.once('value', function (userSnap) {
           var isNewUser = !userSnap.exists();
-          if (isNewUser) {
-            user.providerData.forEach(function (profile) {
-              if (profile.providerId == 'facebook.com') {
-                var user = {
-                  name: profile.displayName,
-                  email: profile.email,
-                  photoURL: profile.photoURL
-                };
-                userRef.set(user);
-                service.auth = user;
-              }
-            });
-          } else {
-            //So that we load the users saved changes when they login, and not overwrite them with provider values
-            var profile = userSnap.val();
-            service.auth.name = profile.name;
-            service.auth.email = profile.email; 
-            service.auth.photoURL = profile.photoURL;
-          }
+
+
+          user.providerData.forEach(function (profile) {
+            if (profile.providerId == 'facebook.com') {
+              svc.auth = isNewUser ? profile : userSnap.val();
+              svc.auth.photoURL = profile.photoURL;
+              userRef.set(svc.auth);
+            }
+          });
+
+          $rootScope.$broadcast('login', svc.auth);
         });
 
         var presenceRef = db.ref('presence/' + user.uid);
         amOnline.on('value', function (snapshot) {
           if (snapshot.val()) {
             presenceRef.onDisconnect().set(firebase.database.ServerValue.TIMESTAMP);
-            presenceRef.set(true); 
+            presenceRef.set(true);
           }
         });
 
-        console.log('svc - logged in');
         $location.path('/');
       } else {
-        console.log('svc - not logged in');
         $location.path('/login');
       }
     });
 
-    service.logout = function () {
+    svc.logout = function () {
       $firebaseAuth().$signOut();
-      service.auth = {};
-      return service.auth;
+      svc.auth = null;
+      $rootScope.$broadcast('logout', svc.auth);
+      return svc.auth;
     };
 
-    return service;
+    return svc;
   }
 
 })();

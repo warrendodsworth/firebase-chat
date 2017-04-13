@@ -18,9 +18,7 @@
     $routeProvider.when('/', {
       templateUrl: 'home/home.html', controller: 'home',
       resolve: {
-        // controller will not be loaded until $waitForSignIn resolves
-        // $waitForSignIn returns a promise so the resolve waits for it to complete
-        "currentAuth": ['$firebaseAuth', function ($firebaseAuth) {
+        "auth": ['$firebaseAuth', function ($firebaseAuth) {
           return $firebaseAuth().$requireSignIn();
         }]
       }
@@ -28,10 +26,7 @@
       .when('/chat/:id', {
         templateUrl: 'home/chat.html', controller: 'chat',
         resolve: {
-          // Auth refers to our $firebaseAuth wrapper in the example above
-          // $requireSignIn returns a promise so the resolve waits for it to complete
-          // If the promise is rejected, it will throw a $stateChangeError (see above)
-          "currentAuth": ['$firebaseAuth', function ($firebaseAuth) {
+          "auth": ['$firebaseAuth', function ($firebaseAuth) {
             return $firebaseAuth().$waitForSignIn();
           }]
         }
@@ -39,7 +34,7 @@
       .when('/manage', {
         templateUrl: 'account/manage.html', controller: 'account.manage',
         resolve: {
-          "currentAuth": ['$firebaseAuth', function ($firebaseAuth) {
+          "auth": ['$firebaseAuth', function ($firebaseAuth) {
             return $firebaseAuth().$waitForSignIn();
           }]
         }
@@ -53,3 +48,10 @@
 
 })();
 
+
+// Auth refers to our $firebaseAuth wrapper in the example above
+// $requireSignIn returns a promise so the resolve waits for it to complete
+// If the promise is rejected, it will throw a $stateChangeError (see above)
+
+// controller will not be loaded until $waitForSignIn resolves
+// $waitForSignIn returns a promise so the resolve waits for it to complete
