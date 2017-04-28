@@ -11,7 +11,6 @@
     var svc = {};
     var auth = firebase.auth();
     var db = firebase.database();
-    var amOnline = db.ref('.info/connected');
     svc.auth = null;
 
     $firebaseAuth().$onAuthStateChanged(function (user) {
@@ -32,8 +31,9 @@
           $rootScope.$broadcast('login', svc.auth);
         });
 
+        var online = db.ref('.info/connected');
         var presenceRef = db.ref('presence/' + user.uid);
-        amOnline.on('value', function (snapshot) {
+        online.on('value', function (snapshot) {
           if (snapshot.val()) {
             presenceRef.onDisconnect().set(firebase.database.ServerValue.TIMESTAMP);
             presenceRef.set(true);
