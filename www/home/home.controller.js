@@ -10,28 +10,42 @@
   function homeController($scope, $location, $firebaseArray, _chat, auth) {
     var vm = $scope;
     var db = firebase.database();
-    
+
     var myUid = auth.uid;
-    var chatsRef = db.ref('chats/');
     var membersRef = db.ref('members/');
     var usersRef = db.ref('users/');
-
-    vm.chats = $firebaseArray(chatsRef);
     vm.users = $firebaseArray(usersRef);
 
-    //chats join members 
-    // chatsRef.once('value', function (chats) {
-    //   membersRef.once('value', function (members) {
-    //     vm.chats = _chat.extend({}, members.val(), chats.val());
-    //   });
-    // });
+    var chatsRef = db.ref('chats/');
+    var myChatsRef = db.ref('users/' + myUid + '/chats');
 
-    //  membersRef.once('value', function (members) {
-    //      members.forEach(function (chat) {
-    //         chat.hasChild(myUid);
-    //      });
-    //  });
+    //get mychats
+    chatsRef.once('value', function (chats) {
+      myChatsRef.once('value', function (myChats) {
+        myChats.forEach(function (c) {
 
+        });
+
+        //get all chats which have keys in myChats
+        chats.forEach(function (c) {
+
+        });
+      });
+    });
+
+    //get chat ids with this member
+    db.ref('members')
+      .startAt(myUid)
+      .endAt(myUid)
+      .once('value', function (snap) {
+        snap.forEach(function (s) {
+          console.log(s.key);
+        })
+      });
+
+
+
+    vm.chats = $firebaseArray(chatsRef);
 
     vm.chatWith = function ($uid, name) {
       var chatId = null, newChat = true;
@@ -54,6 +68,7 @@
             chatId = Math.round(Math.random() * 100000000);
             db.ref('members/' + chatId + '/' + $uid).set(true);
             db.ref('members/' + chatId + '/' + myUid).set(true);
+            db.ref('users/' + myUid + '/chats/' + chatId).set(true);
             db.ref('chats/' + chatId).set({ title: name, timestamp: firebase.database.ServerValue.TIMESTAMP });
           }
 
@@ -79,3 +94,15 @@
 //     'facebook:10154384221665146': true
 //   }
 // };
+
+//  membersRef.once('value', function (members) {
+//    members.forEach(function (chat) {
+//         chat.hasChild(myUid);
+//    });
+//  });
+
+//chatsRef.once('value', function (chats) {
+//   membersRef.once('value', function (members) {
+//     vm.chats = _chat.extend({}, members.val(), chats.val());
+//   });
+// });
