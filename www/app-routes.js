@@ -12,17 +12,25 @@
         }
       });
     }])
-    .config(['$routeProvider', routes]);
+    .config(['$routeProvider', '$locationProvider', routes]);
 
-  function routes($routeProvider) {
-    $routeProvider.when('/', {
-      templateUrl: 'home/home.html', controller: 'home',
-      resolve: {
-        "auth": ['$firebaseAuth', function ($firebaseAuth) {
-          return $firebaseAuth().$requireSignIn();
-        }]
-      }
-    })
+  function routes($routeProvider, $locationProvider) {
+
+    $locationProvider.hashPrefix('');
+    $locationProvider.html5Mode({
+      enabled: false,
+      requireBase: false
+    });
+
+    $routeProvider
+      .when('/', {
+        templateUrl: 'home/home.html', controller: 'home',
+        resolve: {
+          "auth": ['$firebaseAuth', function ($firebaseAuth) {
+            return $firebaseAuth().$requireSignIn();
+          }]
+        }
+      })
       .when('/chat/:id', {
         templateUrl: 'home/chat.html', controller: 'chat',
         resolve: {
@@ -38,6 +46,9 @@
             return $firebaseAuth().$waitForSignIn();
           }]
         }
+      })
+      .when('/lab', {
+        templateUrl: 'home/lab.html', controller: 'lab',
       })
       .when('/login', {
         templateUrl: 'account/login.html', controller: 'account.login'

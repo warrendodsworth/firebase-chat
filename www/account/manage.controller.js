@@ -15,7 +15,7 @@
     ])
 
     .controller('account.manage', ['$scope', '$routeParams', '_profile', 'auth',
-      function ($scope, $routeParams, Profile, auth) {
+      function ($scope, $routeParams, _profile, auth) {
         var user = firebase.auth().currentUser;
         // create a three-way binding to our Profile as $scope.profile
         _profile(user.uid).$bindTo($scope, 'profile');

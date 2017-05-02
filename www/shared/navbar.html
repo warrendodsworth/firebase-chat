@@ -12,6 +12,8 @@
 
       <div class="navbar-collapse navbar-side-menu" uib-collapse="isNavCollapsed">
         <ul ng-if="auth" class="nav navbar-nav navbar-right">
+          <li><a href="#/lab">Lab</a></li>
+          <li><a href="#/">Home</a></li>
           <li>
             <a href="#/manage">
               <img ng-src="{{auth.photoURL}}" class="img-circle img-xs" alt="Photo" />&nbsp; {{auth.displayName}}

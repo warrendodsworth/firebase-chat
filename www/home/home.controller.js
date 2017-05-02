@@ -10,9 +10,8 @@
   function homeController($scope, $location, $firebaseArray, _chat, auth) {
     var vm = $scope;
     var db = firebase.database();
-    var auth = firebase.auth();
-
-    var myUid = auth.currentUser.uid;
+    
+    var myUid = auth.uid;
     var chatsRef = db.ref('chats/');
     var membersRef = db.ref('members/');
     var usersRef = db.ref('users/');

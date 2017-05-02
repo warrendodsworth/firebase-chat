@@ -24,9 +24,12 @@
     "karma": "^1.0.0",
     "karma-chrome-launcher": "^1.0.1",
     "karma-jasmine": "^1.0.2",
-    "livereload": "^0.4.1",
+    "gulp-livereload": "^3.8.1",
     "main-bower-files": "^2.11.1",
     "shelljs": "^0.3.0",
     "uglify-js": "^2.6.1"
+  },
+  "scripts": {
+    "start": "firebase serve"
   }
 }

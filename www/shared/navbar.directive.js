@@ -22,7 +22,7 @@
 
     vm.$on('login', function (e, a) {
       vm.auth = _account.auth;
-    })
+    });
 
     vm.logout = function () {
       vm.auth = _account.logout();

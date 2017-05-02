@@ -1,0 +1,38 @@
+﻿<h2 class="text-center v-m">Tweets</h2>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <form name="form" novalidate
+          ng-keyup="$event.keyCode == 13 && createTweet(tweet)"
+          ng-submit="createTweet(tweet)">
+
+      <div class="form-group">
+        <textarea ng-model="tweet.text" class="form-control" rows="3" placeholder="Tweet away"></textarea>
+      </div>
+
+      <input type="submit" value="Tweet" class="btn btn-sm btn-default" />
+    </form>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <div ng-repeat="tweet in tweets">
+      <p ng-init="edit=false" ng-show="!edit">
+        <span class="pull-right">
+          <a ng-click="edit=true" ng-show="!edit">Edit</a>&nbsp;
+          <a ng-click="deleteTweet(tweet)">Delete</a>
+        </span>
+        {{tweet.text}}
+      </p>
+
+      <ng-form ng-show="edit" class="form-inline">
+        <div class="form-group">
+          <input type="text" ng-model="tweet.text" class="form-control" placeholder="Tweet" />
+        </div>
+        <input ng-click="updateTweet(tweet); edit=false;" type="submit" value="Tweet" class="btn btn-default" />
+      </ng-form>
+    </div>
+  </div>
+</div>
+
