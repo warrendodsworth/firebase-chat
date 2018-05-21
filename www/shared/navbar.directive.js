@@ -20,6 +20,23 @@
     var vm = $scope;
     vm.isNavCollapsed = true;
 
+    var user = firebase.auth().currentUser;
+    if (!user) {
+      $location.path('/login');
+      console.log('navbar: not logged in');
+    }
+
+    firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {
+        vm.user = Profile();
+        $scope.$apply();
+      }
+      else {
+        $location.path('/login');
+        console.log('navbar: not logged in');
+      }
+    });
+
     vm.$on('login', function (e, a) {
       vm.auth = _account.auth;
     });
